@@ -1,0 +1,592 @@
+.cn-content {
+    width: 100%;
+    padding: 10px 30px;
+}
+.cn-content button {
+    border: 1px solid transparent;
+    outline: none;
+}
+.cn-content h3 {
+    font-size: 39px;
+    margin: 0;
+    padding: 0;
+    font-weight: 700;
+}
+.cn-content p {
+    font-size: 17px;
+    opacity: 0.87;
+    margin: 10px 0px;
+}
+.cnca-abs, .cncf-atr, .cncfg-selected,
+.cncfgd-li , .cncf-atr, .cncf-submit-btn, .cncaa {
+    display: flex;
+    align-items: center;
+}
+.cnc, .create-page-divs {
+    margin-top: 20px;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+} 
+.cnc-asset {
+    width: calc(55% - 30px);
+}
+.cnc-form {
+    width: min(45%, 550px);
+}
+.cnc-asset {
+    position: relative;
+    height: 550px;
+}
+.cnc-asset img {
+    width: 100%;
+    height: 100%;
+    border-radius: 10px;
+}
+.placeholder-img {
+    width: 100%;
+    height: 100%;
+    background-color: rgba(18, 18, 18, 0.5);
+    border-radius: 10px;
+}
+.night-mode .placeholder-img {
+    background-color: rgba(255, 255, 255, 0.12);
+}
+.cnca-abs {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    z-index: 3;
+    top: 0px;
+    left: 0px;
+    border-radius: 10px;
+    justify-content: center;
+    background-image: linear-gradient(
+        to bottom,
+        rgba(18, 18, 18, 0.42),
+        rgba(18, 18, 18, 0.69),
+        rgba(18, 18, 18, 0.42)
+    );
+    display: none;
+    cursor: pointer;
+}
+.cnca-abs.not-image {
+    width: max-content;
+    height: max-content;
+    top: 0px;
+    left: unset;
+    right: 0px;
+    display: flex;
+    border-radius: 0px 10px 0px 0px;
+}
+.cnc-asset:hover .cnca-abs, .cnca-abs.show {
+    display: flex;
+}
+.night-mode .cnca-abs.show {
+    background-image: linear-gradient(
+        to bottom,
+        rgba(255, 255, 255, 0.03),
+        rgba(255, 255, 255, 0.01),
+        rgba(255, 255, 255, 0.03)
+    );
+}
+.cpd {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+}
+.cpd- {
+    width: min(calc(50% - 10px), 500px);
+    background-color: rgba(255, 255, 255, 0.12);
+    border-radius: 10px;
+    box-shadow: rgba(0, 0, 0, 0.5) 4px 7px 32px; 
+}
+.cpd_div {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.light-mode .cpd- {
+    background-color: rgba(18, 18, 18, 0.075);
+    box-shadow: rgba(0, 0, 0, 0.5) 0px 0px 1px; 
+}
+.cpd-:active, .cpd-:focus {
+    border: 1px solid rgba(255, 255, 255, 0.9);
+}
+ .light-mode .cpd-:active, .light-mode .cpd-:focus {
+    border: 1px solid rgba(18, 18, 18, 0.078);
+}
+.cnca-abs .cn-label, .cpd_div .cn-label {
+    width: min(90%, 300px);
+    padding: 20px;
+    padding-bottom: 27px;
+    border: 3px solid rgb(255, 255, 255, 0.8);
+    opacity: 0.84;
+    border-radius: 10px;
+}
+.cnca-abs.not-image .cn-label {
+    width: max-content;
+    border: none;
+}
+.cpd_div .cn-label {
+    border: none;
+    height: 240px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+.cncaa {
+    width: 100%;
+    justify-content: center;
+}
+.cncaa-icon {
+    width: 60px;
+    height: 60px;
+}
+.light-mode .cncaa-icon {
+    opacity: 0.85;
+}
+.cnca-abs.not-image .cncaa-icon {
+    width: 24px;
+    height: 24px;
+}
+.cnca-abs .cn-label p {
+    font-size: 15px;
+    color: var(--white);
+    text-align: center;
+    margin: 0;
+    margin-top: 10px;
+}
+.cnca-abs.not-image .cn-label p {
+    display: none;
+}
+.cpd_div .cn-label p {
+    text-align: center;
+    margin: 0;
+    margin-top: 21px;
+}
+input[type=file] {
+    display: none;
+}
+.cnc-form > div {
+    width: 100%;
+    margin-top: 21px;
+}
+.cnc-form > div:first-child {
+    margin-top: 0px;
+}
+.cncf-field label {
+    font-size: 15px;
+    font-weight: 500;
+}
+.cncf-gallery {
+    position: relative;
+}
+.cncfg-selected {
+    justify-content: space-between;
+    width: 100%;
+    padding: 12px;
+    border-radius: 10px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    font-size: 15px;
+    margin-top: 12px;
+}
+.light-mode .cncfg-selected {
+    border: 1px solid rgba(18, 18, 18, 0.1);
+}
+.cncfg-icon {
+    width: 18px;
+    height: 17px;
+    cursor: pointer;
+    transition: rotate 0.3s ease-in-out;
+}
+.cncfg-icon.true {
+    transform: rotate(180deg);
+}
+.cncfg-dropdown {
+    width: 100%;
+    position: absolute;
+    top: 110%;
+    right: 0px;
+    z-index: 2;
+    border-radius: 10px;
+    background-color: rgb(36, 36, 36);
+    transition: opacity 0.3s ease-in-out, height 0.3s ease-in-out;
+    border-radius: 10px 0px 0px 10px;
+    padding: 6px 3px;
+    padding-right: 0px;
+    box-shadow: rgba(0, 0, 0, 0.5) 4px 7px 32px; 
+    overflow-y: auto;
+    display: none;
+    visibility: hidden;
+    height: 0px;
+    transition: visibility 0.3s ease-in-out, height 0.3s ease-in-out;
+    transition-delay: 0.03s;
+}
+.cncfg-dropdown.true {
+    display: block;
+    visibility: visible;
+    height: auto;
+    max-height: 210px;
+}
+.light-mode .cncfg-dropdown {
+    background-color: rgb(255, 255, 255);
+    box-shadow: rgba(0, 0, 0, 0.12) 0px 3px 18px; 
+}
+.cncfgd-div {
+    width: 100%;
+    height: 150px;
+    padding: 15px 18px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.cncfgd-error {
+    max-width: 100%;
+}
+.cncfgd-error p {
+    font-size: 12.5px;
+    margin: 0;
+}
+.cncfgd-error-btn {
+    border: none;
+    border-radius: 18px;
+    padding: 8px 15px;
+    padding-bottom: 9px;
+    outline: none;
+    font-weight: 550;
+    color: var(--white);
+    background-color: var(--bgblue);
+    margin-top: 12px;
+}
+.cncfgd-li {
+    width: 100%;
+    padding: 15px 18px;
+    cursor: pointer;
+    border-radius: 6px;
+    font-size: 14px;
+    opacity: 0.85;
+    font-weight: 480;
+}
+.cncfgd-li:hover {
+    background-color: rgba(48, 48, 48);
+}
+.light-mode .cncfgd-li:hover {
+    background-color: rgba(18, 18, 18, 0.045);
+}
+.cncfgd-li span {
+    width: 100%;
+    display: inline-block;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space-collapse: nowrap;
+    word-break: break-all;
+}
+.cncf-field input, .cncf-field textarea {
+    width: 100%;
+    padding: 15px;
+    padding: 12px;
+    border-radius: 10px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    font-size: 15px;
+    margin-top: 12px;
+    background: transparent;
+    outline: none;
+    font-family: inherit;
+}
+.cncf-field input:focus, .cncf-field textarea:focus {
+    border: 1px solid rgba(255, 255, 255, 0.9);
+}
+.light-mode .cncf-field input, .light-mode .cncf-field textarea {
+    border: 1px solid rgba(18, 18, 18, 0.1);
+}
+.light-mode .cncf-field input:focus, .light-mode .cncf-field textarea:focus {
+    border: 1px solid rgba(18, 18, 18, 0.9);
+}
+.cncf-field textarea {
+    min-height: 90px;
+    resize: none;
+}
+.cncf-field input::placeholder,
+.cncf-field textarea::placeholder {
+    opacity: 0.75;
+    font-size: inherit;
+    color: inherit;
+}
+.cncf-field.a-th > div {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.thumbnail-input-label {
+    width: 100%;
+    border-radius: 10px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    display: flex;
+    align-items: center;
+    height: max-content;
+    overflow: hidden;
+    margin-top: 12px;
+}
+.t-choose {
+    width: max-content;
+    padding: 12px 10px;
+    padding-bottom: 13px;
+    background-color: rgb(255, 255, 255, 0.3);
+}
+.light-mode .t-choose {
+    background-color: rgba(18, 18, 18, 0.08);
+}
+.thumbnail-input-label-span {
+    display: flex;
+    flex: 2;
+    padding: 12px 10px;
+    padding-bottom: 13px;
+}
+.thumbnail-input-label span {
+    font-size: 15px;
+    display: inline-block;
+    width: 100%;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+    word-break: break-all;
+}
+.cncf-field.a-th > div > span {
+    display: inline-block;
+    padding: 10px 3px;
+    padding-left: 10px;
+    margin-top: 12px;
+    cursor: pointer;
+    width: 35px;
+    height: max-content;
+}
+.a-th-icon {
+    width: 21px;
+    height: 21px;
+}
+.cncf-atr {
+    width: 100%;
+    padding: 12px;
+    background-color: rgba(255, 255, 255, 0.048);
+    border-radius: 10px;
+    margin-top: 12px;
+    font-size: 14.5px;
+    font-weight: 500;
+}
+.light-mode .cncf-atr {
+    background-color: rgba(18, 18, 18, 0.045);
+}
+.cncf-atr-btn {
+    width: 45px;
+    height: 45px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 10px;
+    background-color: rgba(255, 255, 255, 0.12);
+}
+.light-mode .cncf-atr-btn {
+    background-color: rgba(18, 18, 18, 0.078);
+}
+.cnab-icon {
+    width: 21px;
+    height: 21px;
+}
+.light-mode .cncf-atr {
+    opacity: 0.84;
+}
+.light-mode .cnab-icon {
+    opacity: 0.7;
+}
+.cnab-atr {
+    width: calc(100% - 55px);
+    margin-left: 10px;
+    font-weight: 480;
+    font-size: 13.5px;
+    line-height: 1.2rem;
+}
+.cncf-submit-btn {
+    width: 100%;
+    justify-content: center;
+    padding: 12px;
+    padding-bottom: 13px;
+    color: var(--white);
+    background-color: rgba(40, 145, 250, 0.9);
+    margin-top: 21px;
+    border-radius: 10px;
+}
+.cncf-submit-btn:hover {
+    background-color: var(--bgblue);
+}
+.csb-icon {
+    color: inherit;
+    width: 16px;
+    height: 15px;
+}
+.cncf-submit-btn span {
+    margin-left: 12px;
+    font-size: 15px;
+    font-weight: 600;
+    color: inherit;
+}
+.thumbnail-input {
+    display: block !important;
+}
+
+/* modal */
+.CreateNFT .__Create__Gallery__ .__Modal__Container__ {
+    width: min(100%, 870px);
+    max-height: 96%;
+}
+.attribute-selector-form {
+    margin-top: 18px;
+}
+.asf-grid {
+    width: 100%;
+    display: flex;
+    align-items: center;
+}
+.asfg-name {
+    width: calc(50% - 30px);
+}
+.asfg-type {
+    width: calc(50% + 25px);
+}
+.asf-grid span {
+    font-weight: 500;
+    font-size: 14.5px;
+}
+.asfg-type span {
+    margin-left: 39px;
+}
+.asfg-name span {
+    margin-left: 10px;
+}
+.asf-grid.field {
+    margin-top: 12px;
+    height: 42px;
+    justify-content: space-between;
+}
+.asf-grid.field > div {
+    border: 1px solid rgba(255, 255, 255, 0.8);
+    border-radius: 7px;
+    height: 100%;
+}
+.light-mode .asf-grid.field > div {
+    border: 1px solid rgba(18, 18, 18, 0.3);
+}
+.asfg-type {
+    display: flex;
+    align-items: center;
+}
+.asfg-type button {
+    width: 45px;
+    height: 100%;
+    border-right: 1px solid rgba(255, 255, 255, 0.8);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: transparent;
+}
+.light-mode .asfg-type button {
+    border-right: 1px solid rgba(18, 18, 18, 0.3);
+}
+.asfgtb-icon {
+    width: 19px;
+    height: 19px;
+}
+.asf-grid.field > div input {
+    width: 100%;
+    background: transparent;
+    outline: none;
+    border: none;
+    height: 100%;
+    padding: 15px;
+    padding: 12px;
+    font-size: 15px;
+    font-family: inherit;
+}
+.asf-grid.field > div input::placeholder {
+    opacity: 0.8;
+    font-size: inherit;
+    color: inherit;
+}
+.asf-add-more-btn {
+    margin-top: 18px;
+    padding: 10px 15px;
+    border-radius: 10px;
+    font-size: 15px;
+    font-weight: 550;
+    background-color: rgba(255, 255, 255, 0.08);
+}
+.light-mode .asf-add-more-btn {
+    background-color: rgba(18, 18, 18, 0.075);
+    opacity: 0.63;
+}
+.asf-add-more-btn:hover {
+    background-color: rgba(255, 255, 255, 0.12);
+}
+.light-mode .asf-add-more-btn:hover {
+    background-color: rgba(18, 18, 18, 0.12);
+}
+.asf-btn {
+    margin-top: 60px;
+    margin-bottom: 12px;
+    width: max-content;
+    padding: 12px 15px;
+    width: 100%;
+    justify-content: center;
+    color: var(--white);
+    background-color: rgba(40, 145, 250, 0.9);
+    border-radius: 10px;
+}
+.asf-btn.true {
+    margin-top: 10px;
+    margin-bottom: 0px;
+}
+.asf-btn:hover {
+    background-color: var(--bgblue);
+}
+
+@media screen and (max-width: 1030px) {
+    .cnc {
+        flex-direction: column;
+    }
+    .cnc > div {
+        width: 100%;
+    }
+    .cnc-form {
+        margin-top: 24px;
+    }
+}
+@media screen and (max-width: 600px) {
+    .cnc-asset {
+        height: 350px;
+    }
+}
+@media screen and (max-width: 500px) {
+    .cn-content {
+        padding: 10px;
+    }
+    .cn-content h3 {
+        font-size: 27px;
+    }
+    .cnca-abs .cn-label {
+        width: 240px;
+    }
+    .cnca-abs .cn-label p {
+        font-size: 13.5px;
+    }
+    .cncaa-icon {
+        width: 42px;
+        height: 42px;
+    }
+    .asf-btn {
+        margin-top: 10px;
+        margin-bottom: 0px;
+    }
+}

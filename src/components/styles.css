@@ -1,0 +1,215 @@
+.Skeleton {
+    width: 100%;
+    height: 100%;
+    border-radius: inherit;
+}
+.night-mode .Skeleton {
+    animation: skeleton-loading 1s linear infinite alternate;
+}
+.light-mode .Skeleton {
+    animation: skeleton-lightmode-loading 1s linear infinite alternate;
+}
+
+@keyframes skeleton-loading {
+    0% {
+        /* background-color: hsl(200, 20%, 80%); */
+        background-color: rgba(255, 255, 255, 0.1);
+    }
+    100% {
+        /* background-color: hsl(200, 20%, 90%); */
+        background-color: rgba(255, 255, 255, 0.24);
+    }
+}
+@keyframes skeleton-lightmode-loading {
+    0% {
+        background-color: hsl(200, 20%, 80%);
+    }
+    100% {
+        background-color: hsl(200, 20%, 95%);
+    }
+}
+
+.spinner {
+    border-radius: 50%;
+    border: 3px solid #f3f3f3;
+    border-top: 3px solid rgb(20, 20, 20);
+    animation: spin 2s linear infinite;
+}
+
+@keyframes spin {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+/* tool-tip */
+.tooltip {
+    /* display: none; */
+    opacity: 0;
+}
+.tooltip.true {
+    display: block;
+    opacity: 1;
+}
+._tool-tip_ {
+    margin-top: 0px;
+    background-color: rgb(46, 46, 46);
+    width: 0px;
+    height: 0px;
+    transition: opacity 0.3s ease-in-out, height 0.3s ease-in-out;
+    border-radius: 10px;
+    opacity: 0;
+    padding: 12px 15px;
+    padding-bottom: 14px;
+    box-shadow: rgba(0, 0, 0, 0.5) 4px 7px 32px; 
+    position: fixed;
+    z-index: 9999; 
+}
+.light-mode ._tool-tip_ {
+    background-color: rgb(255, 255, 255);
+    box-shadow: rgba(0, 0, 0, 0.3) 0px 6px 27px; 
+}
+._tool-tip_arrow {
+    content: '';
+    position: absolute;
+    top: -9px;
+    width: 0px;
+    height: 0px;
+    z-index: -1;
+    border-left: 15px solid transparent;
+    border-right: 15px solid transparent;
+}
+._tool-tip_arrow.bottom {
+    border-bottom: 15px solid rgb(47, 47, 47);
+}
+._tool-tip_arrow.top {
+    top: calc(100% - 1.5px);
+    border-top: 15px solid rgb(47, 47, 47);
+}
+.light-mode ._tool-tip_arrow.bottom {
+    border-bottom: 15px solid rgb(255, 255, 255);
+}
+.light-mode ._tool-tip_arrow.top {
+    border-top: 15px solid rgb(255, 255, 255);
+}
+.tool-tip-txt-span {
+    opacity: 0.98;
+    transition: opacity 0.3s ease-in-out, width 0.18s ease-in;
+    display: inline-block;
+    font-size: 15px;
+    font-weight: 500;
+    width: 0px;
+    height: 0px;
+    word-break: break-all;
+    white-space: pre-wrap;
+}
+.light-mode .tool-tip-txt-span {
+    opacity: 0.95;
+}
+._tool-tip_.true {
+    opacity: 1;
+    width: auto;
+    height: auto;
+}
+@media screen and (max-width: 600px) {
+    .tool-tip-txt-span {
+        font-size: 14px;
+    }
+}
+
+/* tool-tip */
+
+.noData {
+    width: 100%;
+    height: max-content;
+    margin-top: 27px;
+    min-height: 400px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-top: 10px;
+}
+.noData-img {
+    width: 200px;
+    height: 150px;
+    background-color: #f5f5f5;
+}
+.nft-analytics-no-data .noData-img {
+    width: min(85%, 390px);
+    height: 250px;
+}
+.noData-img img {
+    width: 100%;
+    height: 100%;
+}
+.noData h3 {
+    margin: 0;
+    margin-top: 12px;
+    padding: 0;
+    text-align: center;
+    white-space: nowrap;
+    font-size: 17px;
+}
+.nft-analytics-no-data .noData h3 {
+    margin-top: 27px;
+}
+.skeleton {
+    width: 100%;
+    height: 100%;
+    border-radius: inherit;
+    animation: skeleton-loading 1s linear infinite alternate;
+}
+
+
+.error-page {
+    width: 100%;
+    height: 100%;
+    margin-top: 6px;
+    min-height: 240px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.error-page button {
+    border: 0px solid transparent;
+    outline: none;
+}
+.error-page > div {
+    margin-top: 6px;
+    width: 100% !important;
+    height: max-content !important;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.ep-icon-div {
+    margin-top: 10px;
+}
+.ep-icon {
+    width: 70px;
+    height: 65px;
+    color: rgb(252, 252, 65);
+}
+.error-page p {
+    font-size: 15px;
+}
+.ep-btn {
+    margin-top: 21px;
+    width: max-content;
+    padding: 9px 21px;
+    padding-bottom: 10px;
+    border-radius: 18px;
+    color: var(--white);
+    font-size: 15px;
+    font-weight: 500;
+    background-color: rgba(40, 145, 250, 0.9);
+    border: none;
+    outline: none;
+}
+.ep-btn:hover {
+    background-color: var(--bgblue);
+}

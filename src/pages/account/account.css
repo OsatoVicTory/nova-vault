@@ -1,0 +1,406 @@
+.acct-desc,
+.ah-display-on-scroll, .ah-routes,
+.glm-head {
+    padding: 10px 20px;
+}
+.glm-head {
+    padding-top: 0px;
+}
+.acct-pfp {
+    padding: 5px 20px;
+}
+.acct-name {
+    padding: 0px 20px;
+}
+.account-wrapper button {
+    border: 1px solid transparent;
+    outline: none;
+}
+.acct-banner {
+    width: 100%;
+    height: 250px;
+    background-repeat: no-repeat;
+    background-position: center;
+    object-fit: cover;
+    background-size: 100% 150%;
+}
+.acct-pfp {
+    width: max-content;
+    height: max-content;
+    margin-top: -120px;
+    overflow: hidden;
+}
+.acct-pfp img, .acct-pfp-loading {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    border: 6px solid rgba(18, 18, 18, 0.8);
+    box-shadow: 0 1px 1px rgba(0, 0, 0, .15), 0 1px 2px rgba(0, 0, 0, .3);
+}
+.light-mode .acct-pfp img, .light-mode .acct-pfp-loading {
+    border: 6px solid rgb(255, 255, 255);
+    box-shadow: none;
+}
+.acct-name, .acct-name-side, .anc-btn, .acd,
+.ados, .ados > div, .ah-routes, .acct-name-side > div { 
+    display: flex;
+    align-items: center;
+}
+.acct-name {
+    width: 100%;
+    justify-content: space-between;
+}
+.acct-name > span {
+    font-size: 27px;
+    font-weight: 600;
+}
+.acct-name > span.loading {
+    width: min(100%, 330px);
+    display: inline-block;
+    height: 25px;
+    border-radius: 6px;
+}
+.acct-name-side {
+    margin-left: 10px;
+}
+.acct-name-side > div {
+    width: max-content;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    border-radius: 18px;
+    opacity: 0.8;
+}
+.light-mode .acct-name-side > div {
+    border: 1.2px solid rgba(18, 18, 18, 0.25);
+}
+.anc-url {
+    max-width: 155px;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+    padding: 7px 11px;
+    padding-bottom: 10px;
+    padding-right: 0px;
+    font-size: 14px;
+}
+.anc {
+    padding: 0px 7px;
+    padding-right: 11px;
+    border-radius: 0px 18px 18px 0px;
+    background-color: rgba(18, 18, 18, 0.05);
+}
+.light-mode .anc {
+    background-color: transparent;
+}
+.anc-icon {
+    width: 14px;
+    height: 14px;
+}
+.light-mode .anc-icon {
+    opacity: 0.8;
+}
+.anc-btn {
+    width: max-content;
+    padding: 9px 15px;
+    margin-left: 12px;
+    border-radius: 18px;
+}
+.acct-name-side > div.a-loading {
+    width: 150px;
+    height: 25px;
+    border-radius: 10px;
+    opacity: 1;
+    margin-left: 10px;
+    border: none;
+}
+.acct-name-side > div.a-loading:first-child {
+    margin-left: 0px;
+}
+.anc-btn, .profile-btn, .ahr-btn.true {
+    background-color: rgba(255, 255, 255, 0.08);
+}
+.light-mode .anc-btn, .light-mode .profile-btn, 
+.light-mode .ahr-btn.true {
+    background-color: rgba(18, 18, 18, 0.05);
+}
+.anc-btn:hover, .profile-btn:hover {
+    background-color: rgba(255, 255, 255, 0.12);
+}
+.light-mode .anc-btn:hover, .light-mode .profile-btn:hover {
+    background-color: rgba(18, 18, 18, 0.08);
+}
+.anc-btn span {
+    font-size: 15px;
+    font-weight: 500;
+}
+.ancb-icon {
+    width: 15px;
+    height: 15px;
+    margin-left: 10px;
+}
+.acd.loading {
+    width: calc(100% - 50px);
+    height: 18px;
+    border-radius: 6px;
+}
+.acd span {
+    font-size: 15px;
+    font-weight: 500;
+}
+.acd-join {
+    opacity: 0.8;
+    margin-left: 6px;
+}
+.and-icon {
+    margin-left: 6px;
+    opacity: 0.9;
+    width: 18px;
+    height: 18px;
+}
+.and {
+    margin-top: 6px;
+    width: calc(100% - 50px);
+}
+.and > div {
+    display: flex;
+    align-items: center;
+    width: 100%;
+}
+.and-loading {
+    flex-direction: column;
+}
+.and-loading > div {
+    width: 100%;
+    height: 17.5px;
+    border-radius: 6px;
+    margin-top: 7px;
+}
+.and-loading > div:first-child {
+    margin-top: 0px;
+}
+.and-span {
+    display: -webkit-box;
+    white-space: pre-wrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    min-height: 21px;
+    word-break: break-word;
+    opacity: 0.9;
+}
+.and-span.false {
+    width: calc(100% - 90px);
+    line-clamp: 1;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
+}
+.and-span.true {
+    width: 100%;
+    display: inline-block;
+    height: auto;
+    max-height: max-content;
+}
+.and-more {
+    display: inline-block;
+    margin-left: 6px;
+    font-weight: bold;
+}
+.and-more.false {
+    display: none;
+}
+.and-span .pointer {
+    margin-left: 6px;
+    font-weight: 500;
+}
+.ah-sticky {
+    position: sticky;
+    top: 72px;
+    right: 0px;
+    z-index: 1;
+    background-color: rgb(18, 18, 18)
+}
+.light-mode .ah-sticky {
+    background-color: rgb(255, 255, 255);
+}
+.ah-display-on-scroll {
+    display: none;
+    visibility: hidden;
+    transition: visibility 0.1s ease-in-out;
+    transition-delay: 0.03s;
+}
+.ah-display-on-scroll.true {
+    display: block;
+    visibility: visible;
+}
+.ados {
+    padding: 0px;
+    justify-content: space-between;
+    width: 100%;
+}
+.ados > div img {
+    width: 39px;
+    height: 33px;
+    border-radius: 3px;
+}
+.profile-name {
+    margin-left: 10px;
+    font-size: 18px;
+    font-weight: 600;
+}
+.profile-btn {
+    width: max-content;
+    padding: 6px 8px;
+    border-radius: 6px;
+    margin-left: 10px;
+    cursor: pointer;
+}
+.pb-icon {
+    width: 16px;
+    height: 14px;
+}
+.ah-routes {
+    margin-top: 0px;
+    width: 100%;
+}
+.ahr-btn {
+    width: max-content;
+    margin-left: 18px;
+    font-weight: 550;
+    opacity: 0.7;
+    font-size: 15px;
+    background-color: transparent;
+    padding: 8px 18px;
+    border-radius: 8px;
+}
+.ahr-btn:first-child {
+    margin-left: 0px;
+}
+.ahr-btn:hover {
+    opacity: 0.87;
+}
+.ahr-btn.true {
+    opacity: 1;
+    background-color: rgba(255, 255, 255, 0.12);
+}
+.light-mode .ahr-btn.true {
+    background-color: rgba(18, 18, 18, 0.09);
+}
+.glm-ul.Gallery {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    flex: wrap;
+}
+.glm-ul.Gallery .Art-li {
+    width: calc(25% - 10px);
+    margin-top: 12px;
+}
+
+@media screen and (max-width: 1200px) {
+    .glm-ul.Gallery .Art-li {
+        width: calc(33.33% - 10px);
+    }
+}
+@media screen and (max-width: 1030px) {
+    .glm-ul.Gallery .Art-li {
+        width: calc(25% - 10px);
+    }
+    .acct-pfp {
+        width: max-content;
+        height: max-content;
+        margin-top: -105px;
+        overflow: hidden;
+    }
+    .acct-pfp img {
+        width: 126px;
+        height: 126px;
+    }
+}
+@media screen and (max-width: 780px) {
+    .and {
+        width: 100%;
+    }
+    .anc-url, .anc-btn span {
+        display: none;
+    }
+    .acct-name-side > div.a-loading {
+        width: 50px;
+    }
+    .acct-name > span {
+        font-size: 22px;
+    }
+    .anc {
+        padding: 8px 10px;
+        padding-bottom: 9px;
+        border-radius: 8px;
+        background-color: rgba(255, 255, 255, 0.08);
+        display: flex;
+        align-items: center;
+    }
+    .light-mode .anc {
+        background-color: rgba(18, 18, 18, 0.05);
+    }
+    .acct-name-side > div {
+        border: 1px solid transparent;
+    }
+    .ancb-icon {
+        margin-left: 0px;
+    }
+    .acct-desc span {
+        font-size: 14px;
+    }
+}
+@media screen and (max-width: 700px) {
+    .glm-ul.Gallery .Art-li {
+        width: calc(33.33% - 10px);
+    }
+    .account-wrapper .glm-head {
+        flex-direction: row !important;
+    }
+    .account-wrapper .glmh1 {
+        width: calc(100% - 96px);
+    }
+    .account-wrapper .glmh {
+        margin-top: 0px;
+        margin-left: 10px;
+        width: max-content !important;
+    }
+    .acd.loading, .and {
+        width: 100%;
+    }
+}
+@media screen and (max-width: 500px) {
+    .acct-desc,
+    .ah-display-on-scroll, .ah-routes,
+    .glm-head {
+        padding: 10px;
+    }
+    .acct-pfp {
+        padding: 5px 10px;
+    }
+    .acct-name {
+        padding: 0px 10px;
+    }
+    .glm-ul.Gallery .Art-li {
+        width: calc(50% - 10px);
+    }
+    .acct-name > span {
+        font-size: 19px;
+    }
+    .acct-banner {
+        height: 200px;
+    }
+    .acct-pfp {
+        margin-top: -90px;
+    }
+    .acct-pfp img {
+        width: 105px;
+        height: 105px;
+    }
+    .acct-name.loaded {
+        margin-top: -9px;
+    }
+    .ahr-btn {
+        font-size: 14px;
+        margin-left: 15px;
+        padding: 8px 14px;
+    }
+}

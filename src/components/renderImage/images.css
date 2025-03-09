@@ -1,0 +1,170 @@
+.NFTGridImage {
+    overflow: hidden;
+    position: relative;
+    /* box-shadow: 0 1px 1px rgba(0, 0, 0, .15), 0 1px 2px rgba(0, 0, 0, .3); */
+    height: max-content;
+    border-radius: 10px;
+    display: flex;
+    align-items: flex-end;
+    flex-direction: column;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);   
+}
+.nft-g-abs {
+    overflow: hidden;
+    width: 100%;
+    height: 270px;
+}
+.nft-g-image {
+    width: 100%;
+    height: 100%;
+}
+.nft-g-image-loading {
+    width: 100%;
+    height: 100%;
+    border-radius: 10px 10px 0px 0px;
+}
+.nft-g-image img {
+    border-radius: 10px 10px 0px 0px;
+    transition: transform 0.15s ease-in-out;
+}
+.nft-g-image img:hover {
+    transform: scale(1.03);
+}
+.nft-g-image-cloak {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    z-index: 0;
+    background-image: linear-gradient(
+        to bottom,
+        rgba(18, 18, 18, 0.03), 
+        rgba(18, 18, 18, 0.15), 
+        rgba(18, 18, 18, 0.9)
+    );
+    width: 100%;
+    height: 100%;
+    border-radius: 6px;
+}
+.nft-g-image-txt {
+    padding: 15px 12px;
+    padding-bottom: 19px;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    background-color: rgba(37, 37, 37, 0.9);
+}
+.light-mode .nft-g-image-txt {
+    background-color: transparent;
+}
+.nft-g-image-txt span {
+    display: inline-block;
+    width: max-content;
+    max-width: 100%;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+    color: var(--white);
+}
+.light-mode .nft-g-image-txt span {
+    color: #000000;
+}
+.nft-g-image-txt.loading > div {
+    width: 100%;
+    border-radius: 6px;
+}
+.nft-g-image-txt.loading .ngit1 {
+    height: 19px;
+}
+.nft-g-image-txt.loading .ngit2 {
+    height: 16px;
+}
+.ngit1 {
+    font-size: 16px;
+    font-weight: 650;
+}
+.ngit2 {
+    font-size: 14px;
+    font-weight: 500;
+    margin-top: 8px;
+    opacity: 0.75;
+}
+
+.NftFileImage {
+    width: 100%;
+    height: 270px;
+    position: relative;
+}
+.anct-item .NftFileImage {
+    width: 57px;
+    height: 55px;
+    margin-left: 30px;
+}
+.anct-start .NftFileImage {
+    width: 50px;
+    height: 48px;
+}
+.NftFileImage img {
+    width: 100%;
+    height: 100%;
+}
+.anct-item .NftFileImage img {
+    margin-left: 0px !important;
+}
+.nft-file-image-div {
+    position: absolute;
+    bottom: 7px;
+    right: 6px;
+    z-index: 1;
+    width: max-content;
+    padding: 9px 10px;
+    display: flex;
+    align-items: center;
+    background-color: rgba(18, 18, 18, 1);
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);   
+    border-radius: 5px;
+}
+.anct-div .nft-file-image-div {
+    padding: 3px;
+    bottom: 2px;
+    right: 0px;
+}
+.nfid-icon {
+    width: 17px;
+    height: 17px;
+    color: var(--white);
+}
+.anct-div .nfid-icon {
+    width: 11px;
+    height: 11px;
+}
+.nft-file-image-div span {
+    margin-left: 9px;
+    font-size: 15px;
+    font-weight: 500;
+    color: var(--white);
+}
+.anct-div .nft-file-image-div span {
+    font-size: 12px !important;
+    margin-left: 4px;
+}
+
+@media screen and (min-width: 1200px) {
+    .nft-g-image-txt {
+        padding: 15px 12px;
+        padding-bottom: 22px;
+    }
+}
+@media screen and (max-width: 1030px) {
+    .nft-g-abs {
+        height: 210px;
+    }
+}
+
+/* @media screen and (max-width: 700px) {
+    .ngit1 {rzads
+        font-size: 15px;
+    }
+    .ngit2 {
+        font-size: 14px;
+    }
+} */

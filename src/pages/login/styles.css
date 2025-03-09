@@ -1,0 +1,121 @@
+.Login {
+    width: 100%;
+    height: 100%;
+}
+.landingPage {
+    width: 100%;
+    height: 100%;
+}
+.landingPage {
+    display: flex;
+    background-color: var(--bgblue);
+    padding: 0px 25px;
+}
+.idonk_logo {
+    position: absolute;
+    top: 15px;
+    left: 15px;
+    z-index: 999;
+    width: max-content !important;
+    height: max-content !important;
+    z-index: 6;
+}
+.idonk_logo img {
+    width: 150px;
+    height: 60px;
+}
+.landing_page_wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.lpw-content {
+    width: min(100%, 500px);
+    height: max-content;
+    min-height: 330px;
+    border-radius: 10px;
+    border: 1px solid var(--bordergrey);
+    background-color: var(--white);
+    box-shadow: var(--boxshadow);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 10px 27px;
+    padding-bottom: 36px;
+}
+.landingPage > div {
+    height: 100%;
+}
+.landingPage .landing_page_wrapper {
+    width: 42%;
+}
+.lp-banner {
+    width: 58%;
+    /* background-color: var(--bgblue); */
+    position: sticky;
+    top: 0px;
+    right: 0px;
+    overflow: hidden;
+}
+.lpb-img {
+    width: 100%;
+    height: 100%;
+    /* position: relative; */
+}
+.lpb-img img {
+    width: 100%;
+    height: 100%;
+}
+.novaV_logo {
+    width: max-content;
+    height: max-content;
+}
+.novaV_logo img {
+    width: 150px;
+    height: 105px;
+    object-fit: cover;
+}
+.lpw-content h3 {
+    font-size: 33px;
+    margin-top: 7px;
+    margin-bottom: 10px;
+}
+.lpw-content p {
+    font-size: 18px;
+    margin-top: 6px;
+    opacity: 0.85;
+}
+.connect-wallet-btn {
+    margin-top: 33px;
+    width: min(330px, 100%);
+    padding: 10px 30px;
+    padding-bottom: 12px;
+    border-radius: 24px;
+    background-color: var(--bgblue);
+    color: var(--white);
+    font-size: 17px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.cwb-icon {
+    width: 19px;
+    height: 20px;
+    color: var(--white);
+}
+.connect-wallet-btn span {
+    margin-left: 15px;
+    font-weight: 550;
+}
+@media screen and (max-width: 780px) {
+    .landingPage {
+        justify-content: center;
+        padding: 0px 10px;
+    }
+    .landingPage .landing_page_wrapper {
+        width: min(500px, 100%);
+    }
+    .lp-banner {
+        display: none;
+    }
+}

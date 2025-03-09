@@ -1,0 +1,104 @@
+.Notification {
+    width: 100%;
+}
+.__Notification__ .modal-body {
+    padding: 5px 0px;
+}
+.notification.loading {
+    display: flex;
+    justify-content: center;
+}
+.notification.loading {
+    padding: 30px;
+}
+.notif-no-data {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.notif-no-data .noData {
+    min-height: 210px;
+}
+.notification ul {
+    padding: 0px;
+    margin: 0px;
+    width: 100%;
+    list-style: none;
+}
+.notif-link {
+    width: 100%;
+    outline: none;
+    text-decoration: none;
+    display: inline-block;
+}
+.notif-li-div {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    padding: 12px 20px;
+}
+.notif-li-div:hover, .notif-li-div.true {
+    background-color: rgba(255, 255, 255, 0.06);
+}
+.light-mode .notif-li-div:hover, .light-mode .notif-li-div.true {
+    background-color: rgba(18, 18, 18, 0.08);
+}
+.notif-link.no-hover .notif-li-div:hover {
+    background-color: none !important;
+}
+.notif-div-icon {
+    width: max-content;
+    padding-right: 10px;
+}
+.notif-icon {
+    width: 36px;
+    height: 33px;
+    opacity: 0.81;
+}
+.notif-div-img {
+    width: max-content;
+    padding-right: 3px;
+}
+.notif-div-img img {
+    width: 45px;
+    height: 45px;
+    border-radius: 5px;
+}
+.notif-txt {
+    display: flex;
+    flex-direction: column;
+    width: calc(100% - 60px);
+    margin-left: 13px;
+}
+.notif-desc {
+    font-size: 14.5px;
+    display: inline-block;
+    width: 100%;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+    word-break: break-all;
+    opacity: 1 !important;
+}
+.notif-base {
+    margin-top: 6px;
+    font-size: 13.5px;
+    opacity: 0.72 !important;
+}
+@media screen and (max-width: 500px) {
+    .notif-li-div {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        width: 100%;
+        padding: 12px 10px;
+    }
+    .notif-txt {
+        display: flex;
+        flex-direction: column;
+        width: calc(100% - 50px);
+        margin-left: 6px;
+    }
+}

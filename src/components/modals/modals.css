@@ -1,0 +1,226 @@
+.__Create__Gallery__ .__Modal__Container__ {
+    width: min(100%, 1030px);
+    max-height: 96%;
+}
+.__Notification__ .__Modal__Container__ {
+    width: min(100%, 600px);
+    max-height: 96%;
+}
+.__SuccessModal__ .__Modal__Container__ {
+    width: min(100%, 460px);
+}
+.__Modal__Container__ button {
+    border: 1px solid transparent;
+    outline: none;
+}
+.modal-header.j-space-between {
+    justify-content: space-between;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+}
+.light-mode .modal-header.j-space-between {
+    border-bottom: 1px solid rgba(18, 18, 18, 0.1);
+}
+.modal-header.j-space-between span {
+    font-size: 22px;
+    font-weight: 600;
+}
+.create-data-form {
+    margin-top: 18px;
+    padding: 0px 21px;
+}
+.create-data-form form {
+    width: 100%;
+}
+.cdf- {
+    display: grid;
+    grid-template-columns: calc(45% - 10px) calc(55% - 20px);
+    gap: 15px;
+    justify-content: space-between;
+}
+.cdf-field {
+    width: 100%;
+    margin-top: 18px;
+}
+.cdf-field:first-child {
+    margin-top: 0px;
+}
+.cdfa-abs, .cdfl {
+    display: flex;
+    align-items: center;
+}
+.cdff-image {
+    position: relative;
+    width: 100%;
+    height: 270px;
+    margin-top: 12px;
+}
+.cdff-image img {
+    width: 100%;
+    height: 100%;
+    border-radius: 10px;
+}
+.placeholder-img {
+    width: 100%;
+    height: 100%;
+    background-color: rgba(18, 18, 18, 0.5);
+    border-radius: 10px;
+}
+.night-mode .placeholder-img {
+    background-color: rgba(255, 255, 255, 0.12);
+}
+.cdfa-abs {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    z-index: 1;
+    top: 0px;
+    left: 0px;
+    border-radius: 10px;
+    justify-content: center;
+    background-image: linear-gradient(
+        to bottom,
+        rgba(18, 18, 18, 0.42),
+        rgba(18, 18, 18, 0.69),
+        rgba(18, 18, 18, 0.42)
+    );
+    display: none;
+    cursor: pointer;
+}
+.cdff-image:hover .cdfa-abs, .cdfa-abs.show {
+    display: flex;
+}
+.night-mode .cdfa-abs.show {
+    background-image: linear-gradient(
+        to bottom,
+        rgba(255, 255, 255, 0.02),
+        rgba(255, 255, 255, 0.006),
+        rgba(255, 255, 255, 0.02)
+    );
+}
+.cdfa-abs .cdf-label {
+    width: min(90%, 210px);
+    height: max-content;
+    padding: 18px 13px;
+    padding-bottom: 21px;
+    border: 2px solid rgb(255, 255, 255, 0.8);
+    opacity: 0.84;
+    border-radius: 10px;
+}
+.cdfl {
+    width: 100%;
+    justify-content: center;
+}
+.cdfl-icon {
+    width: 30px;
+    height: 30px;
+    color: var(--white);
+}
+.cdfa-abs .cdf-label p {
+    font-size: 13.5px;
+    color: var(--white);
+    text-align: center;
+    margin: 0;
+    margin-top: 10px;
+}
+input[type=file] {
+    display: none;
+}
+.cdf-field label {
+    font-size: 15px;
+    font-weight: 500;
+}
+.cdf-field input, .cdf-field textarea {
+    width: 100%;
+    padding: 15px;
+    padding: 12px;
+    border-radius: 10px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    font-size: 15px;
+    margin-top: 12px;
+    background: transparent;
+    outline: none;
+    font-family: inherit;
+}
+.cdf-field input:focus, .cdf-field textarea:focus {
+    border: 1px solid rgba(255, 255, 255, 0.9);
+}
+.light-mode .cdf-field input, .light-mode .cdf-field textarea {
+    border: 1px solid rgba(18, 18, 18, 0.1);
+}
+.light-mode .cdf-field input:focus, .light-mode .cdf-field textarea:focus {
+    border: 1px solid rgba(18, 18, 18, 0.9);
+}
+.cdf-field textarea {
+    min-height: 90px;
+    resize: none;
+}
+.cdf-field input::placeholder,
+.cdf-field textarea::placeholder {
+    opacity: 0.75;
+    font-size: inherit;
+    color: inherit;
+}
+.cdf-submit {
+    width: 100%;
+    margin-top: 27px;
+    padding: 12px 15px;
+}
+.cdf-submit input, .mcs-btn {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 12px;
+    padding-bottom: 13px;
+    color: var(--white);
+    background-color: rgba(40, 145, 250, 0.9);
+    outline: none;
+    border: none;
+    border-radius: 10px;
+    font-weight: 600;
+    cursor: pointer;
+}
+.cdf-submit input:hover, .mcs-btn:hover {
+    background-color: var(--bgblue);
+}
+.success-icon-div {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 10px;
+}
+.success-icon {
+    color: #25d366;
+    width: 105px;
+    height: 95px;
+}
+.success-modal h3 {
+    margin: 10px auto;
+    margin-top: 18px;
+    text-align: center;
+    font-size: 24px;
+    font-weight: 700;
+}
+.success-modal p {
+    margin: 12px auto;
+    text-align: center;
+    font-size: 14px;
+    opacity: 0.8;
+}
+.mcm-base {
+    margin-top: 30px;
+    width: 100%;
+    padding: 12px 15px;
+}
+
+@media screen and (max-width: 700px) {
+    .cdf- {
+        display: flex;
+        flex-direction: column;
+        grid-template-columns: unset;
+    }
+    .cdf- > div {
+        width: 100%;
+    }
+}

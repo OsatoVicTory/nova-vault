@@ -1,0 +1,281 @@
+.__Create__Gallery__ .__Container__ {
+    width: 100%;
+    max-height: 96%;
+}
+.cgc-header button {
+    border: 1px solid transparent;
+    outline: none;
+}
+.cgc-header {
+    display: flex;
+    align-items: center;
+    padding: 10px 20px;
+}
+.cgc-body {
+    padding: 10px 27px;
+}
+.cgc-close-btn {
+  width: max-content;
+  padding: 8px;
+  border-radius: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: transparent;
+}
+.cgc-icon {
+  width: 19px;
+  height: 19px;
+}
+.cgc-close-btn:hover {
+  background-color: rgba(255, 255, 255, 0.21);
+}
+.light-mode .cgc-close-btn:hover {
+  background-color: rgba(18, 18, 18, 0.08);
+}
+.cgc button:active, .cgc button:focus {
+  border: 1px solid rgba(255, 255, 255, 0.21);
+}
+.cgc-header h3 {
+  margin: 0px;
+  padding: 0px;
+  margin-left: 21px;
+  text-align: center;
+  font-weight: 600;
+  font-size: 21px;
+}
+.cgc-body > p {
+  margin: 3px 0px;
+  margin-top: 0px;
+  /* text-align: center; */
+  font-weight: 300;
+  opacity: 0.8;
+}
+.create-data-form {
+    margin-top: 18px;
+}
+.create-data-form form {
+    width: 100%;
+}
+.cdf-d {
+    display: flex;
+    justify-content: space-between;
+}
+.cdf-d{
+    margin-top: 21px;
+}
+.cdf-d:first-child {
+    margin-top: 0px;
+}
+.cdf-pic {
+    width: calc(49% - 10px);
+}
+.cdf-fields {
+    width: calc(51% - 10px);
+}
+.cdf-field {
+    width: 100%;
+}
+.cdf-fields .cdf-field {
+    margin-top: 18px;
+}
+.cdf-fields .cdf-field:first-child {
+    margin-top: 0px;
+}
+.cdfa-abs, .cdfl {
+    display: flex;
+    align-items: center;
+}
+.cdff-image {
+    position: relative;
+    width: 100%;
+    margin-top: 12px;
+}
+.cdff-i-min {
+    min-height: 280px;
+}
+.cdff-image img {
+    width: 100%;
+    height: 100%;
+    border-radius: 10px;
+}
+.placeholder-img {
+    width: 100%;
+    height: 100%;
+    background-color: rgba(18, 18, 18, 0.5);
+    border-radius: 10px;
+}
+.night-mode .placeholder-img {
+    background-color: rgba(255, 255, 255, 0.12);
+}
+.cdfa-abs {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    z-index: 1;
+    top: 0px;
+    left: 0px;
+    border-radius: 10px;
+    justify-content: center;
+    background-image: linear-gradient(
+        to bottom,
+        rgba(18, 18, 18, 0.42),
+        rgba(18, 18, 18, 0.69),
+        rgba(18, 18, 18, 0.42)
+    );
+    display: none;
+    cursor: pointer;
+}
+.cdff-image:hover .cdfa-abs, .cdfa-abs.show {
+    display: flex;
+}
+.night-mode .cdfa-abs.show {
+    background-image: linear-gradient(
+        to bottom,
+        rgba(255, 255, 255, 0.02),
+        rgba(255, 255, 255, 0.006),
+        rgba(255, 255, 255, 0.02)
+    );
+}
+.cdfa-abs .cdf-label {
+    width: min(90%, 210px);
+    height: max-content;
+    padding: 18px 13px;
+    padding-bottom: 21px;
+    border: 2px solid rgb(255, 255, 255, 0.8);
+    opacity: 0.84;
+    border-radius: 10px;
+}
+.cdfl {
+    width: 100%;
+    justify-content: center;
+}
+.cdfl-icon {
+    width: 30px;
+    height: 30px;
+    color: var(--white);
+}
+.cdfa-abs .cdf-label p {
+    font-size: 13.5px;
+    color: var(--white);
+    text-align: center;
+    margin: 0;
+    margin-top: 10px;
+}
+input[type=file] {
+    display: none;
+}
+.cdf-field label {
+    font-size: 15px;
+    font-weight: 500;
+}
+.cdf-field input, .cdf-field textarea {
+    width: 100%;
+    padding: 15px;
+    padding: 12px;
+    border-radius: 10px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    font-size: 15px;
+    margin-top: 12px;
+    background: transparent;
+    outline: none;
+    font-family: inherit;
+}
+.cdf-field input::-webkit-calendar-picker-indicator {
+    opacity: 0.8;
+}
+.night-mode .cdf-field input::-webkit-calendar-picker-indicator {
+    filter: invert(1);
+}
+.cdf-field input:focus, .cdf-field textarea:focus {
+    border: 1px solid rgba(255, 255, 255, 0.9);
+}
+.light-mode .cdf-field input, .light-mode .cdf-field textarea {
+    border: 1px solid rgba(18, 18, 18, 0.1);
+}
+.light-mode .cdf-field input:focus, .light-mode .cdf-field textarea:focus {
+    border: 1px solid rgba(18, 18, 18, 0.9);
+}
+.cdf-field textarea {
+    min-height: 90px;
+    resize: none;
+}
+.cdf-field input::placeholder,
+.cdf-field textarea::placeholder {
+    opacity: 0.75;
+    font-size: inherit;
+    color: inherit;
+}
+.cdf-submit {
+    width: 100%;
+    margin-top: 27px;
+    padding: 12px 3px;
+    display: flex;
+    justify-content: center;
+}
+.mcs-btn {
+    width: 100%;
+}
+.cdf-submit input {
+    width: min(100%, 750px) !important;
+}
+.cdf-submit input, .mcs-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 12px;
+    padding-bottom: 13px;
+    color: var(--white);
+    background-color: rgba(40, 145, 250, 0.9);
+    outline: none;
+    border: none;
+    border-radius: 10px;
+    font-weight: 600;
+    cursor: pointer;
+}
+.cdf-submit input:hover, .mcs-btn:hover {
+    background-color: var(--bgblue);
+}
+.success-icon-div {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 10px;
+}
+.success-icon {
+    color: #25d366;
+    width: 105px;
+    height: 95px;
+}
+.success-cgc h3 {
+    margin: 10px auto;
+    margin-top: 18px;
+    text-align: center;
+    font-size: 24px;
+    font-weight: 700;
+}
+.success-cgc p {
+    margin: 12px auto;
+    text-align: center;
+    font-size: 14px;
+    opacity: 0.8;
+}
+.mcm-base {
+    margin-top: 30px;
+    width: 100%;
+    padding: 12px 15px;
+}
+
+@media screen and (max-width: 700px) {
+    .cdf-d {
+        flex-direction: column;
+        grid-template-columns: unset;
+    }
+    .cdf-d > div {
+        width: 100%;
+    }
+    .cgc-header, .cgc-body {
+        padding: 10px 12px;
+    }
+}
