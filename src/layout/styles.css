@@ -205,7 +205,7 @@
     /* background-color: rgb(18, 18, 18); */
     /* background-color: rgba(255, 255, 255, 0.1); */
     backdrop-filter: blur(6px);
-    z-index: 1;
+    z-index: 10;
 }
 .__main__.true .main-header {
     box-shadow: 1px -1px 8px rgba(255, 255, 255, 0.04);
@@ -651,7 +651,7 @@ input:checked + .slider:before {
 
 .light-mode .scrolled .main-header {
     background-color: rgb(251, 251, 251, 1) !important;
-    z-index: 3;
+    z-index: 13;
     box-shadow: 0 0.8px 1px 1.5px rgba(0, 0, 0, 0.08);
 } 
 .night-mode .scrolled .main-header {

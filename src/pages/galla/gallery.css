@@ -103,8 +103,11 @@
 .ghwbp, .ghwb-stats {
     text-shadow: 0 1px 3px rgba(0, 0, 0, .15), 0 1px 2px rgba(0, 0, 0, .3);
 }
-.ghwb-stat:nth-child(2) {
-    margin-left: 40px;
+.ghwb-stat {
+    margin-left: 27px;
+}
+.ghwb-stat:first-child {
+    margin-left: 0px !important;
 }
 .ghwbss.loading {
     width: 270px;
@@ -953,6 +956,9 @@
         justify-content: space-between;
         margin-left: 3px;
         margin-top: 20px;
+    }
+    .ghwb-stat {
+        margin-left: 10px;
     }
     .ghw-copy > div {
         border: 1px solid transparent;

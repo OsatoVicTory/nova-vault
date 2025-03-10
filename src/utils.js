@@ -49,9 +49,12 @@ export const Z_ = (z) => {
 export const getTime = (date, x = 0) => {
     if(x) date = String(multiplyBigDecimals(String(date), 1000));
     date = new Date(Number(date));
-    const hr = date.getHours();
+    let hr = date.getHours();
     let m = "AM";
-    if(hr >= 12) m = "PM";
+    if(hr >= 12) {
+        if(hr > 12) hr %= 12;
+        m = "PM";
+    }
     return `${Z_(hr)}:${Z_(date.getMinutes())} ${m}`;
 }
 
@@ -59,13 +62,11 @@ export const getFullDateWithTime = (date, x = 0) => {
     return getDateWithoutTime(date, x) + " at " + getTime(date, x);
 };
 
-export const parseAmount = (amt) => {
-    if(amt < 1E9) amt = Number(amt);
-
-    if(amt > 1E9) return divideBigDecimals(amt, 1E9, 2) + " B";
-    if(amt > 1E6) return (amt / 1E6).toFixed(2) + " M";
-    else if(amt > 9999) return (amt / 1000).toFixed(2) + " K";
-    else return amt;
+export const parseAmount = (amt, fixed = 3) => {
+    if(compareVals(amt, 1E9, ">")) return divideBigDecimals(amt, 1E9, fixed) + " B";
+    if(compareVals(amt, 1E6, ">")) return divideBigDecimals(amt, 1E6, fixed) + " M";
+    else if(compareVals(amt, 9999, ">")) return divideBigDecimals(amt, 1000, fixed) + " K";
+    else return String(amt);
 };
 
 export const getDistribution = async (data, fn) => {
@@ -106,9 +107,9 @@ export const parseGalleryData = (val, dec = 10000000000) => {
     const metadata = parseStringData(meta_data);
     return {
         owner, name, metadata, attendees, createdAt, 
-        price: divideBigDecimals(Number(price), dec), 
+        price: divideBigDecimals(price, dec), 
         votingEnd, votingStart, 
-        minStakingAmount: divideBigDecimals(Number(minStakingAmount), dec)
+        minStakingAmount: divideBigDecimals(minStakingAmount, dec)
     };
 };
 
@@ -140,7 +141,7 @@ export const parseNftMetaData = (data) => {
 
 export const setMessageFn = (fn, text) => {
     fn(text);
-    setTimeout(() => fn({}), 2000);
+    setTimeout(() => fn({}), 4200);
 };
 
 export const valDiff = (val, tar) => {

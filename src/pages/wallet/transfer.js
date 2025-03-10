@@ -3,7 +3,7 @@ import useClickOutside from "../../hooks/useClickOutside";
 import "./w-modals.css";
 import { AiOutlineClose } from "react-icons/ai";
 import { compareVals, setMessageFn } from "../../utils";
-import { createERC20ContractInstance, ERC20_ADDRESS, getAppAddress, multiplyBigDecimals, parseBigInt, subtractBigDecimals } from "../../services/creators";
+import { createERC20ContractInstance, multiplyBigDecimals, parseBigInt, subtractBigDecimals } from "../../services/creators";
 
 const Transfer = ({ closeModal, setMessage, contract, wallet, setWallet, successFn }) => {
 
@@ -30,11 +30,6 @@ const Transfer = ({ closeModal, setMessage, contract, wallet, setWallet, success
             }
 
             const contractInstance = await createERC20ContractInstance(contract.signer);
-
-            const address = getAppAddress(ERC20_ADDRESS);
-            const approve_txn = await contractInstance.approve(address, bigIntAmount);
-            await approve_txn.wait();
-
             const send_txn = await contractInstance.transfer(to, bigIntAmount);
             await send_txn.wait();
 

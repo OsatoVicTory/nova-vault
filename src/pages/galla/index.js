@@ -432,6 +432,10 @@ const Gallery = () => {
 
                                     {!nftLoading && <div className="ghwb-stats">
                                         <div>
+                                            <div className="ghwb-stat">
+                                                <span className="ghwbs-value">{gallery.price} NOVA</span>
+                                                <span className="ghwbs-name">Gallery price</span>
+                                            </div>
                                             {isMember.state && <div className="ghwb-stat">
                                                 <span className="ghwbs-value">{getTotalVolume} NOVA</span>
                                                 <span className="ghwbs-name">Total volume</span>

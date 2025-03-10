@@ -68,7 +68,7 @@ const AttributesSelector = ({ closeModal }) => {
                                             onChange={handleChange} name={`type-${idx}`} />
                                         </div>
                                         <div className="asfg-name">
-                                            <input placeholder="E.g Blue 12%" className="txt-white"
+                                            <input placeholder="E.g Blue" className="txt-white"
                                             onChange={handleChange} name={`name-${idx}`} />
                                         </div>
                                     </div>
