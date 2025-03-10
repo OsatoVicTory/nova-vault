@@ -385,10 +385,17 @@ const NftAsset = () => {
     const getFullDateWithTime_ = useCallback((galla) => {
         if(nftLoading || error) return "";
 
-        if(galla) return getFullDateWithTime(gallery.votingEnd, 1000);
-        else return getFullDateWithTime(nft.metadata.createdAt || (new Date("19 Feb 2025").getTime()));
+        if(galla) {
+            const d_timer_ = (gallery.votingStart - (new Date().getTime() / 1000));
+            if(d_timer_ <= 0 || liveUpdate === "live" || liveUpdate === "ended") {
+                return "end " + getFullDateWithTime(gallery.votingEnd, 1000);
+            } else {
+                return "start " + getFullDateWithTime(gallery.votingStart, 1000); 
+            }
+        }
+        else return getFullDateWithTime(nft.metadata.createdAt);
 
-    }, [nftLoading, error, gallery.votingEnd, nft.metadata]);
+    }, [nftLoading, error, gallery.votingEnd, nft.metadata, liveUpdate]);
 
     const shortenAddy_ = useMemo(() => {
         if(!nft.creator) return "";
@@ -589,7 +596,7 @@ const NftAsset = () => {
                                 <div className='nft-content-box'>
                                     <div className='sales-time'>
                                         <BsClock className='st-icon txt-white' />
-                                        <span className="txt-white">{`Voting ends ${getFullDateWithTime_(1)}`}</span>
+                                        <span className="txt-white">{`Voting ${getFullDateWithTime_(1)}`}</span>
                                     </div>
                                     {showTimer && <div className="asset-timer">
                                         <span className='txt-white'>{`Voting ${showTimer} countdown`}</span>

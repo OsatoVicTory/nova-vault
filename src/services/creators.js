@@ -24,17 +24,18 @@ import safe_vote from "../abi/safe_vote/safeVoteAbi.json";
 import minter from "../abi/minter/minterAbi.json";
 
 
-export const USER_METADATA_ADDRESS = "0xd8b40307a102f410c2466653ded9f9f77767203b";
-export const GALLERY_ADDRESS = "0xdd50353fa92ac538812c9af4dd7594118fdcda2e";
-export const ERC20_ADDRESS = "0xedbb9a30243a04b36d6acb511bdd802150feb183";
-export const ERC1155_ADDRESS = "0x845d93050abbc69ca01daca98edf25e983c9be8a";
-export const NFT_MARKET_ADDRESS = "0xd5c05fd2fc918f0c48bebf0c696e51e724a17ccf";
-export const NFT_LIBRARY_ADDRESS = "0xc098282b47406f3bdcf12eacc426a490584a52a5";
-export const NFT_SUBMIT_ADDRESS = "0x2b1d5d33bf87d0f832609d08aa9efae6a8c0e2a3";
-export const STAKE_ADDRESS = "0x067139cdefc74fda54bd8df619ae107f817e9439";
-export const TICKET_SALE_ADDRESS = "0xe980c013c4ece92afb278f7e21e8ed52eeef91aa";
-export const SAFE_VOTE_ADDRESS = "0x364b378751c10cdbc700c78d45fc84b2af0d2c67"; // "0xffaf5e879e67d4bed37be3e19b09f67d1013bc6a";
-export const MINTER_ADDRESS = "0xe749d56077b311af4237c3767b0f2a83d2f8d8ca";
+export const USER_METADATA_ADDRESS = process.env.REACT_APP_USER_METADATA_ADDRESS;
+export const MINTER_ADDRESS = process.env.REACT_APP_MINTER_ADDRESS;
+export const TICKET_SALE_ADDRESS = process.env.REACT_APP_TICKET_SALE_ADDRESS;
+export const ERC20_ADDRESS = process.env.REACT_APP_ERC20_ADDRESS;
+
+export const ERC1155_ADDRESS = process.env.REACT_APP_ERC1155_ADDRESS;
+export const GALLERY_ADDRESS = process.env.REACT_APP_GALLERY_ADDRESS;
+export const NFT_LIBRARY_ADDRESS = process.env.REACT_APP_NFT_LIBRARY_ADDRESS;
+export const NFT_MARKET_ADDRESS = process.env.REACT_APP_NFT_MARKET_ADDRESS;
+export const NFT_SUBMIT_ADDRESS = process.env.REACT_APP_NFT_SUBMIT_ADDRESS;
+export const SAFE_VOTE_ADDRESS = process.env.REACT_APP_SAFE_VOTE_ADDRESS; 
+export const STAKE_ADDRESS = process.env.REACT_APP_STAKE_ADDRESS;
 
 export const parseBigInt = (uint8) => {
     return ethers.getBigInt(uint8, "myBigInt");
