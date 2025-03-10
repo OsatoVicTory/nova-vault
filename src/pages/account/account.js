@@ -8,7 +8,7 @@ import { AiOutlineSearch, AiOutlineClose } from 'react-icons/ai';
 import { Link, useNavigate, useParams } from 'react-router-dom';
 import { NFTFlexImage, NFTGridImage } from '../../components/renderImage/nftImage';
 import { AppContext } from '../../context';
-import { AVATAR_PIC, parseGalleryData, parseNftMetaData, parseStringData, setMessageFn, shortenAddy } from "../../utils";
+import { AVATAR_PIC, getDateWithoutTime, parseGalleryData, parseNftMetaData, parseStringData, setMessageFn, shortenAddy } from "../../utils";
 import { Skeleton } from "../../components/loading";
 import NoData from "../../components/noData";
 // import { fakeAccount } from "../../fakeDatas";
@@ -370,7 +370,7 @@ const UserAccount = () => {
                         <div className="acct-desc w-full">
                             <div className="acd txt-white w-full">
                                 <span>{`Address ${shortenAddy_}`}</span><BsDot className='and-icon' />
-                                <span className="acd-join">{`Joined Mar 2024`}</span>
+                                <span className="acd-join">{`Joined: ${getDateWithoutTime(account.joinedAt, 1000)}`}</span>
                             </div>
                             <div className="and w-full">
                                 <div>

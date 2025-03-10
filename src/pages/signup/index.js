@@ -2,7 +2,7 @@ import "../../components/modals/modals.css";
 import "./signup.css";
 import { useCallback, useContext, useEffect, useMemo, useState } from "react";
 import { MdEdit } from "react-icons/md";
-import { createUserContractInstance } from "../../services/creators";
+import { createERC20ContractInstance, createUserContractInstance, getDecimals, getTokenAmount } from "../../services/creators";
 import { AppContext } from "../../context";
 import { useNavigate } from "react-router-dom";
 import { parseStringData, setMessageFn } from "../../utils";
@@ -12,7 +12,7 @@ import { sendProfileFile } from "../../services/ipfsServer";
 
 const Signup = () => {
 
-    const { contract, setUser, setMessage } = useContext(AppContext);
+    const { contract, setUser, setMessage, setWallet } = useContext(AppContext);
     const navigate = useNavigate();
     const [pfpFile, setPfpFile] = useState({});
     const [bannerFile, setBannerFile] = useState({});
@@ -96,7 +96,24 @@ const Signup = () => {
             const metadata = m_ + `img=${img_.url}%x2img_public_id=${img_.pub_id}%x2image_banner=${img_.b}%x2banner_public_id=${img_.b_id}`;
             const tx = await contractInstance.registerUser(data.name, data.description, metadata);
             await tx.wait();
-            setUser({ name: data.name, description: data.description, ...parseStringData(metadata) });
+            
+            setUser({ 
+                name: data.name, description: data.description, ...parseStringData(metadata), 
+                joinedAt: new Date().getTime() / 1000 
+            });
+                            
+            const walletContractInstance = await createERC20ContractInstance(contract.signer);
+            const res = await walletContractInstance.balanceOf(contract.address);
+            // res is type bigInt
+            const name = await walletContractInstance.name();
+            const symbol = await walletContractInstance.symbol();
+            const decimals = getDecimals(await walletContractInstance.decimals());
+            const resAmt = getTokenAmount(res, decimals);
+            const ethPrice = String(await walletContractInstance.getPrice());
+            // const bal = await ethersProvider.getBalance(address_);
+            // console.log("ethPrice", ethPrice, "bal", bal);
+            
+            setWallet({ amount: resAmt, symbol, decimals, name, actualAmount: res, ethPrice });
             setMessageFn(setMessage, { status: 'success', message: 'Account Created successfully.' });
             setLoading(false);
             navigate(`/app`);
