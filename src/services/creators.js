@@ -46,16 +46,15 @@ export const compareAddress = (address, userAddress) => {
     return address === userAddress;
 };
 
-// not a must this decimals be wallet.decimals 
-// cus => token * decimals / eth * decimals = token / eth irrespective of what decimals is, decimals will cancel out on division
-// we only using the decimals for precision
+
 export const getPriceInEth = (token, ethPrice, round = 4, decimals=10000000000) => {
     const token_bigint = multiplyBigDecimals(token, decimals);
     const eth_price_bigint = multiplyBigDecimals(token_bigint, ethPrice);
     const res = ethers.formatEther(eth_price_bigint);
     if(!round) return res;
     else {
-        const exp = String(res).includes(".") ? parseFloat(res) : parseInt(res);
+        const str = String(res);
+        const exp = str.includes(".") ? parseFloat(str) : parseInt(str);
         return exp.toExponential(round);
     }
 };

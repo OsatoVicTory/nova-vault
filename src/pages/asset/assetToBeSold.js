@@ -3,13 +3,14 @@ import { useCallback, useContext, useEffect, useMemo, useState } from 'react';
 import { Link, useLocation, useNavigate, useParams } from 'react-router-dom';
 // import { IoIosCopy } from 'react-icons/io';
 import { MdArrowBack, MdKeyboardArrowDown, MdOutlineDateRange, MdOutlineDescription } from 'react-icons/md';
-import { BsClock, BsTag } from 'react-icons/bs';
+import { BsTag } from 'react-icons/bs';
 import { PiTagSimpleBold } from 'react-icons/pi';
 import { LoadingSpinner, Skeleton } from '../../components/loading';
 import { getFullDateWithTime, parseGalleryData, parseNftMetaData, shortenAddy } from '../../utils';
 import { 
+    createERC1155ContractInstance,
     createGalleryContractInstance, createNftLibraryContractInstance, 
-    createNftMarketContractInstance, createNftSubmitContractInstance, divideBigDecimals, getPriceInEth, parseBigInt 
+    createNftMarketContractInstance, createNftSubmitContractInstance, divideBigDecimals, parseBigInt 
 } from '../../services/creators';
 import { AppContext } from '../../context';
 import ErrorPage from '../../components/error';
@@ -45,6 +46,9 @@ const NftAssetToBeSold = () => {
     const url = window.location.href;
 
     const fetchPriceAndQty = async () => {
+        const contractInstance = await createERC1155ContractInstance(contract.signer);
+        const res_s = await contractInstance.balanceOf(owner, token_id);
+        if(!res_s || res_s < 1) throw new Error(errors[3]);
         const nftMarketContractInstance = await createNftMarketContractInstance(contract.signer);
         const d_ = await nftMarketContractInstance.getCostBatch([owner], [parseBigInt(token_id)]);
         if(!d_ || !d_[0]) throw new Error(errors[3]);
@@ -52,7 +56,7 @@ const NftAssetToBeSold = () => {
         // only in forSale page should we check if it is for sale i.e >= 1
         // if(d_[0][2] < 1) throw new Error(errors[4]);
         const [price, forSale, qty] = d_[0];
-        return { price: String(divideBigDecimals(price, wallet.decimals)), forSale, qty: String(qty) };
+        return { price: String(divideBigDecimals(price, wallet.decimals)), forSale, qty: String(qty), owned: String(res_s) };
     };
 
     const fetchNftData_ = async (nftLibraryContractInstance, nftSubmitContractInstance) => {
@@ -248,14 +252,16 @@ const NftAssetToBeSold = () => {
                                 </div>
                                 <div className='nft-content-box'>
                                     <div className='sales-time'>
-                                        <BsClock className='st-icon txt-white' />
-                                        <span className="txt-white">{`${nft.qty} quantity currently up for sale`}</span>
+                                        <BsTag className='st-icon txt-white' />
+                                        <span className="txt-white">
+                                            {`${nft.qty} out of ${nft.owned} quantity currently up for sale`}
+                                        </span>
                                     </div>
                                     <div className='asset-price-div'>
                                         <span className="txt-white">Current price</span>
                                         <div className='asset-price txt-white'>
                                             <h2>{`${nft.price} NOVA`}</h2>
-                                            <span>~ {getPriceInEth(nft.price, wallet.ethPrice)} ETH</span>
+                                            {/* <span>~ {getPriceInEth(nft.price, wallet.ethPrice)} ETH</span> */}
                                         </div>
                                         <div className='apd-btns w-full'>
                                             <button className='apd-btn buy-btn pointer' onClick={buttonStClick}>

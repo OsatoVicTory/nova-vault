@@ -55,7 +55,9 @@ const EditUserModal = ({ closeModal }) => {
                 formData.append('file', pfpFile);
                 formData.append('filename', pfpFile.name);
                 formData.append('file_type', 'image');
-                if(user.img_public_id) formData.append("cloudinary_id", user.img_public_id);
+                if(user.img_public_id && user.img_public_id !== "undefined") {
+                    formData.append("cloudinary_id", user.img_public_id);
+                }
                 formData.append('app_name', 'nft-nova-vault-app');
 
                 // to server, not ipfs upload, as ipfs is for permanent storage (i.e only NFTs)
@@ -70,7 +72,9 @@ const EditUserModal = ({ closeModal }) => {
                 formData.append('file', bannerFile);
                 formData.append('filename', bannerFile.name);
                 formData.append('file_type', 'image');
-                if(user.banner_public_id) formData.append("cloudinary_id", user.banner_public_id);
+                if(user.banner_public_id && user.banner_public_id !== "undefined") {
+                    formData.append("cloudinary_id", user.banner_public_id);
+                }
                 formData.append('app_name', 'nft-nova-vault-app');
 
                 const data_ = await sendProfileFile(formData);

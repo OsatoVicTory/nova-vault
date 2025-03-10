@@ -77,7 +77,7 @@ const Transfer = ({ closeModal, setMessage, contract, wallet, setWallet, success
                         </div>
                         <div className="wmc-field">
                             <label className="txt-white">Amount to send</label>
-                            <input placeholder="Enter amount" type="number" 
+                            <input placeholder="Enter amount" type="number" step={"any"}
                             className="txt-white" name="amount" onChange={handleChange} required />
                         </div>
                         <div className="wmc-field-send">

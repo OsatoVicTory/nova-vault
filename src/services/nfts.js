@@ -1,6 +1,11 @@
 import { Contract } from "ethers";
-import { createERC1155ContractInstance, createNftSubmitContractInstance, ERC1155_ADDRESS, getAppAddress, NFT_LIBRARY_ADDRESS, NFT_MARKET_ADDRESS, NFT_SUBMIT_ADDRESS, parseBigInt } from "./creators";
-import { getDateWithoutTime, parseNftMetaData } from "../utils";
+import { 
+    createERC1155ContractInstance, createNftSubmitContractInstance, 
+    ERC1155_ADDRESS, NFT_LIBRARY_ADDRESS, NFT_MARKET_ADDRESS, 
+    NFT_SUBMIT_ADDRESS, parseBigInt 
+} from "./creators";
+import { parseNftMetaData } from "../utils";
+import { INFURA_ID } from "../config";
 
 export const fetchCreatedNFTs = async (signer, user = null) => {
     const ADDRESS = NFT_LIBRARY_ADDRESS;
@@ -56,7 +61,7 @@ export const fetchAccessibleGalleries = async (address, contractInstance, fetchG
 // 59e9f0865eea4b65a8feff38b21510f3 // key infura
 // mgGlXka3gbcPQhA+TB1Rd8afza7uEE2tRbqYWwrcXZdU2hwIZRfOwA // secret infura
 
-export const INFURA_URL = "wss://arbitrum-sepolia.infura.io/ws/v3/59e9f0865eea4b65a8feff38b21510f3";
+export const INFURA_URL = `wss://arbitrum-sepolia.infura.io/ws/v3/${INFURA_ID}`;
 
 export const fetchNotificationNFTs = async (signer, ids) => {
     const ADDRESS = NFT_LIBRARY_ADDRESS;

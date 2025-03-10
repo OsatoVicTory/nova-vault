@@ -62,6 +62,12 @@
     font-size: 17px;
     font-weight: 510;
 }
+.light-mode .aslld-txt span {
+    color: #000000 !important;
+}
+.night-mode .aslld-txt span {
+    color: var(--white) !important;
+}
 .aslld-txt-base {
     width: 100%;
     display: flex;

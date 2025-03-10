@@ -63,7 +63,7 @@ const CreateNFT = () => {
             );
             const dt = new Date().getTime() / 1000;
             // only gallery that voting has not started as tey are d only ones that accept creating new nfts
-            const res = res_.filter(re => re.votingStart < dt); 
+            const res = res_.filter(re => re.votingStart > dt); 
             setMyGalleries(res);
             setMyGalleriesLoading(false);
         } catch (err) {
@@ -122,7 +122,17 @@ const CreateNFT = () => {
 
             setLoading(true);
 
-            const { gallery_id, minStakingAmount } = selectedGallery;
+            const { gallery_id, minStakingAmount, votingStart } = selectedGallery;
+
+            const date = new Date().getTime();
+
+            // if it is 45 secs or more above votingStart don't send
+            // 45 secs is for latency time to get to backend
+            if(Math.floor(date / 1000) - votingStart >= 45) { 
+                setLoading(false);
+                setMessageFn(setMessage, { status: 'error', message: 'Cannot add NFT because the Gallery is in voting period.' });
+                return;
+            }
 
             if(!gallery_id) {
                 setLoading(false);
@@ -169,7 +179,6 @@ const CreateNFT = () => {
             
             
             const objStr = Object.keys(options).map(key => `${key}=${options[key]}%x2`).join("") + `attributes=${attributes}%x2file_type=${file_type}`;
-            const date = new Date().getTime();
             const data = objStr + `%x2img=${assetImg}%x2price=${minStakingAmount}%x2gallery_id=${gallery_id}%x2createdAt=${date}%x2src=${src}%x2thumbnail=${thumbnail_}`;
             
             const contractInstance = await createNftSubmitContractInstance(contract.signer);

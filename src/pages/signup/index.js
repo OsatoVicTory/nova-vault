@@ -1,23 +1,73 @@
 import "../../components/modals/modals.css";
+import { useAppKit, useAppKitAccount, useAppKitProvider } from "@reown/appkit/react";
 import "./signup.css";
-import { useCallback, useContext, useMemo, useState } from "react";
+import { useCallback, useContext, useEffect, useMemo, useState } from "react";
 import { MdEdit } from "react-icons/md";
-import { createUserContractInstance } from "../../services/creators";
+import { createERC20ContractInstance, createUserContractInstance, getAppAddress, getDecimals, getTokenAmount } from "../../services/creators";
 import { AppContext } from "../../context";
 import { useNavigate } from "react-router-dom";
 import { parseStringData, setMessageFn } from "../../utils";
 import logo from "../../assets/novaVault-logo-nobg.png";
 import banner from "../../assets/phone_banner.png";
 import { sendProfileFile } from "../../services/ipfsServer";
+import { BrowserProvider } from "ethers";
 
 const Signup = () => {
 
+    const { contract, setContract, setUser, setWallet, setMessage } = useContext(AppContext);
+    const { open } = useAppKit();
+    const { address, isConnected } = useAppKitAccount();
+    const { walletProvider } = useAppKitProvider('eip155');
     const navigate = useNavigate();
-    const { setUser, contract, setMessage } = useContext(AppContext);
     const [pfpFile, setPfpFile] = useState({});
     const [bannerFile, setBannerFile] = useState({});
     const [data, setData] = useState({});
     const [loading, setLoading] = useState(false);
+    
+    async function getSignature() {
+        try {
+
+            setLoading(true);
+
+            const ethersProvider = new BrowserProvider(walletProvider);
+            // const ethersProvider = new BrowserProvider(window.ethereum);
+            const signer = await ethersProvider.getSigner();
+            const address_ = getAppAddress(await signer.getAddress());
+            setContract({ address: address_, actualAddress: address_, signer });
+
+            const contractInstance = await createUserContractInstance(signer);
+            const hasRegistered = await contractInstance.hasRegistered(address_);
+            if(hasRegistered) {
+                const user = await contractInstance.getUserInfo(address_);
+                setUser({ name: user[0][0], description: user[0][1], ...parseStringData(user[0][2]), joinedAt: user[1][0] });
+                
+                const walletContractInstance = await createERC20ContractInstance(signer);
+                const res = await walletContractInstance.balanceOf(address_);
+                // res is type bigInt
+                const name = await walletContractInstance.name();
+                const symbol = await walletContractInstance.symbol();
+                const decimals = getDecimals(await walletContractInstance.decimals());
+                const resAmt = getTokenAmount(res, decimals);
+                const ethPrice = String(await walletContractInstance.getPrice());
+                // const bal = await ethersProvider.getBalance(address_);
+                // console.log("ethPrice", ethPrice, "bal", bal);
+                
+                setWallet({ amount: resAmt, symbol, decimals, name, actualAmount: res, ethPrice });
+
+                setLoading(false);
+                navigate(`/app`);
+            } 
+        } catch (err) {
+            console.log(err);
+            setLoading(false);
+            setMessageFn(setMessage, { status: 'error', message: 'Network error. Try again.' });
+        }
+    };
+
+    useEffect(() => {
+        if(!address && !isConnected) open();
+        if(isConnected && address) getSignature();
+    }, [address, isConnected]);
     
     const handleChange = useCallback((e) => {
         const { name, value } = e.target;
@@ -48,6 +98,14 @@ const Signup = () => {
 
     const handleCreate = async (e) => {
         e.preventDefault();
+
+        if(!contract.address) {
+            setMessageFn(setMessage, { status: 'error', message: 'Wallet has not been connected yet.' });
+            if(address) getSignature();
+            else open();
+            return;
+        }
+
         if(loading)  return setMessageFn(setMessage, { status: 'error', message: 'Already making a request.' });
 
         setLoading(true);

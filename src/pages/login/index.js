@@ -64,13 +64,16 @@ const Login = () => {
     };
 
     useEffect(() => {
-        console.log("ad", address, isConnected);
+        console.log("address", address, isConnected);
         if(isConnected && address) getSignature();
     }, [address, isConnected]);
 
     const startConnect = useCallback(() => {
-        if (!isConnected) open();
-    }, [isConnected]);
+        if (!isConnected && !address) {
+            setLoading(true);
+            open();
+        }
+    }, [isConnected, address]);
 
     // const startConnect = useCallback(() => {
     //     return;

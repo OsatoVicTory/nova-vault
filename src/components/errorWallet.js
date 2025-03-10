@@ -65,11 +65,11 @@ const NoWallet = ({ startConnect, setStartConnect }) => {
     }, [address, isConnected]);
     
     const openWallet = useCallback(() => {
-        if(!isConnected && !loading && setLoading) {
+        if(!isConnected && !address && !loading && setLoading) {
             setLoading(true);
             open();
         }
-    }, [loading, isConnected, setLoading]);
+    }, [loading, isConnected, address, setLoading]);
 
     useEffect(() => {
         if(startConnect && !loading) getSignature();

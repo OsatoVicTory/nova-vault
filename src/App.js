@@ -16,12 +16,14 @@ const projectId = REOWN_PROJECT_ID;
 const networks = [arbitrumSepolia]; // [arbitrum, arbitrumSepolia, mainnet];
 
 // 3. Create a metadata object - optional
+const PUBLIC_URL_ = window.location.protocol+"//"+window.location.host;
 const metadata = {
   name: 'NovaVault App',
   description: 'NFT Marketplace app',
-  url: 'http://localhost:3000', //'https://mywebsite.com', // origin must match your domain & subdomain
+  url: PUBLIC_URL_, // PUBLIC_URL_, //'https://mywebsite.com', // origin must match your domain & subdomain
   icons: ['https://avatars.mywebsite.com/']
 }
+// console.log("public_url", PUBLIC_URL_, PUBLIC_URL_ === "http://localhost:3000");
 
 // 4. Create a AppKit instance 
 const modal = createAppKit({

@@ -43,8 +43,8 @@ const AnalyticsHome = () => {
         const id = await contractInstance.getUc(index, contract.address, 0);
         const res_ = await contractInstance.getGallery(id);
         // const { change, len } = await getGalleryAttendeesCntForHomePage(contract.signer, String(id));
-        const { change, len } = { change: 0, len: 0 };
         const g = parseGalleryData(res_);
+        const { change, len } = { change: 0, len: g.attendees };
         return { 
             gallery_id: String(id), ...g, img: g.metadata.img, 
             change, len, date: getFullDateWithTime(res_[4], 1000), ch: change > 0 
@@ -73,7 +73,7 @@ const AnalyticsHome = () => {
             console.log(err);
             setDataGalleries({ ...dataGalleries, error: true });
             setDataGalleriesLoading(false);
-            setMessageFn(setMessage, { status: 'error', message: 'Network error. Try again.' });
+            setMessageFn(setMessage, { status: 'error', message: 'Network error or you might be making too many requests. Try again.' });
         }
     };
     
@@ -91,9 +91,8 @@ const AnalyticsHome = () => {
             nft_library_id: String(n_id), nft_id: String(nft_meta_data_id) 
         };
 
-        // const contractInstance = await createStakeContractInstance(contract.signer);
-        // const len = await contractInstance.getTotalVotes(g_id, n_id);
-        const len = 0;
+        const contractInstance = await createStakeContractInstance(contract.signer);
+        const len = await contractInstance.getTotalVotes(g_id, n_id);
         const { img, price, createdAt, name, src, file_type } = res?.metadata || {};
         if(len > 0) {
             // const [vote_val] = await contractInstance.getCast(g_id, n_id, len);
@@ -139,7 +138,7 @@ const AnalyticsHome = () => {
             console.log("created", err);
             setDataCreated({ ...dataCreated, error: true });
             setDataCreatedLoading(false);
-            setMessageFn(setMessage, { status: 'error', message: 'Network error. Try again.' });
+            setMessageFn(setMessage, { status: 'error', message: 'Network error or you might be making too many requests. Try again.' });
         }
     };
     

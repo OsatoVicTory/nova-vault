@@ -1,4 +1,4 @@
-import { MdEdit } from "react-icons/md";
+// import { MdEdit } from "react-icons/md";
 import '../galla/gallery.css';
 import "./account.css";
 import { IoIosCopy } from "react-icons/io";
@@ -8,7 +8,7 @@ import { AiOutlineSearch, AiOutlineClose } from 'react-icons/ai';
 import { Link, useNavigate, useParams } from 'react-router-dom';
 import { NFTFlexImage, NFTGridImage } from '../../components/renderImage/nftImage';
 import { AppContext } from '../../context';
-import { AVATAR_PIC, parseGalleryData, parseNftMetaData, parseStringData, shortenAddy } from "../../utils";
+import { AVATAR_PIC, parseGalleryData, parseNftMetaData, parseStringData, setMessageFn, shortenAddy } from "../../utils";
 import { Skeleton } from "../../components/loading";
 import NoData from "../../components/noData";
 // import { fakeAccount } from "../../fakeDatas";
@@ -24,7 +24,7 @@ import { FaCheck } from "react-icons/fa6";
 
 const UserAccount = () => {
 
-    const { scrollPosition, contract, wallet } = useContext(AppContext);
+    const { scrollPosition, contract, wallet, setMessage } = useContext(AppContext);
     const { user_address } = useParams();
     const navigate = useNavigate();
     const [search, setSearch] = useState('');
@@ -95,6 +95,10 @@ const UserAccount = () => {
             console.log("gallery", err);
             setDataGalleries({ ...dataGalleries, error: true });
             setDataGalleriesLoading(false);
+            setMessageFn(setMessage, { 
+                status: 'error', 
+                message: 'Network error or you might be making too many requests. Try again and be patient while loading.' 
+            });
         }
     };
 
@@ -127,13 +131,17 @@ const UserAccount = () => {
             const res = await Promise.all(res_.map((val) => {
                 return fetchNft(val, nftLibraryContractInstance, nftSubmitContractInstance).then(res => res)
             }));
-            console.log("created-res", res);
+            // console.log("created-res", res);
             setDataCreated({ data: res, loaded: true, error: false });
             setDataCreatedLoading(false);
         } catch (err) {
             console.log("created", err);
             setDataCreated({ ...dataCreated, error: true });
             setDataCreatedLoading(false);
+            setMessageFn(setMessage, { 
+                status: 'error', 
+                message: 'Network error or you might be making too many requests. Try again and be patient while loading.' 
+            });
         }
     };
 
@@ -160,10 +168,10 @@ const UserAccount = () => {
                     return fetchNftCollectedMetaData(id, contractInstance, nftSubmitContractInstance).then(res => res)
                 })
             );
-            console.log("nfts_data", res, "ids", ids, res_);
+            // console.log("nfts_data", res, "ids", ids, res_);
             const marketContractInstance = await createNftMarketContractInstance(contract.signer);
             const forSale = Array.from(await marketContractInstance.getCostBatch(Array(ids.length).fill(user_address), ids));
-            console.log("forSale", forSale);
+            // console.log("forSale", forSale);
             const res_Forsale = [];
             for(let i = 0; i < forSale.length; i++) {
                 const [price, isForSale, copies] = forSale[i];
@@ -178,6 +186,10 @@ const UserAccount = () => {
             console.log("collected", err);
             setDataCollected({ ...dataCollected, error: true });
             setDataCollectedLoading(false);
+            setMessageFn(setMessage, { 
+                status: 'error', 
+                message: 'Network error or you might be making too many requests. Try again and be patient while loading.' 
+            });
         }
     };
     
@@ -327,7 +339,7 @@ const UserAccount = () => {
 
                 {!accountLoading && <div className="account-header">
                     <div className="ah-section sect-1 w-full">
-                        {account?.image_banner ?
+                        {!account?.image_banner ?
                             <div className="acct-banner"></div> 
                             :
                             <div className="acct-banner" style={{backgroundImage: `url(${account.image_banner})`}}></div>
@@ -380,11 +392,13 @@ const UserAccount = () => {
                                 <span className="profile-name txt-white">{account.name}</span>
                             </div>
                             <div>
-                                <button className="profile-btn">
-                                    <MdEdit className="txt-white pb-icon" />
-                                </button>
-                                <button className="profile-btn">
-                                    <IoIosCopy className="txt-white pb-icon" />
+                                <button className="profile-btn pointer" onClick={handleCopy}>
+                                    {
+                                        copied ?
+                                        <FaCheck className='pb-icon txt-white' />
+                                        :
+                                        <IoIosCopy className='pb-icon txt-white' />
+                                    }
                                 </button>
                             </div>
                         </div>

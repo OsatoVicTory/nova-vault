@@ -33,7 +33,7 @@ export const d_ = (date) => {
 
 export const getWalletTimeChartData = (res_) => {
     const labels = [], data_trans = [], data_rec = [];
-    console.log(res_);
+    // console.log(res_);
     let date_ = 0, cnt = 0;
     for(let i = 0; i < res_.length; i++) {
         let j = i;
@@ -43,13 +43,14 @@ export const getWalletTimeChartData = (res_) => {
             else sum_rec = addBigDecimals(sum_rec, res_[j].amount);
             j++;
         }
-        console.log(i, j, sum_rec, sum_trans, getDateWithOnlyMonth(d_(res_[i].date)));
-        if(sum_trans > 0) data_trans.push(String(sum_trans));
-        if(sum_rec > 0) data_rec.push(String(sum_rec));
-        if(sum_trans > 0 || sum_rec > 0) labels.push(getDateWithOnlyMonth(d_(res_[i].date)));
+        // console.log(i, j, sum_rec, sum_trans, getDateWithOnlyMonth(d_(res_[i].date)));
+        data_trans.push(String(sum_trans));
+        data_rec.push(String(sum_rec));
+        labels.push(getDateWithOnlyMonth(d_(res_[i].date)));
         i = j - 1;
         cnt++;
         if(cnt >= 30) break;
     }
-    return { labels, data_rec, data_trans };
+    // console.log(labels, data_rec, data_trans);
+    return { labels: labels.reverse(), data_rec: data_rec.reverse(), data_trans: data_trans.reverse() };
 };

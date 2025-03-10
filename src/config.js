@@ -1,12 +1,14 @@
-export const REOWN_PROJECT_ID = "a016e98ccc6f153a52c5bcae3e53fd77";
+export const REOWN_PROJECT_ID = process.env.REACT_APP_REOWN_PROJECT_ID;
 
-export const THIRD_WEB_ID = "805e32eeef8d79912f079b3ac853e1f3";
+export const THIRD_WEB_ID = process.env.REACT_APP_THIRD_WEB_ID;
 
-export const THIRD_WEB_SECRET = "CUwKhL7ZNriW7esNnKeCXEhBmnKYBtxts3YRrljgvd0s1Ht2lkz5wmoSrH-Mh1k1B1JujCeD0KsAXBNjA2wQXw";
+export const THIRD_WEB_SECRET = process.env.REACT_APP_THIRD_WEB_SECRET;
 
-export const TOKEN_SYMBOL = "$NOVA";
+export const INFURA_ID = process.env.REACT_APP_INFURA_ID;
 
-export const SERVER_URL = "http://localhost:3030";
+export const TOKEN_SYMBOL = process.env.REACT_APP_TOKEN_SYMBOL;
+
+export const SERVER_URL = process.env.REACT_APP_SERVER_URL;
 
 export const COUNTDOWN_REVEAL_TIME = 20 * 60; // 20 mins
 

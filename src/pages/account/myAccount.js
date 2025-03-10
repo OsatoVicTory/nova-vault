@@ -8,7 +8,7 @@ import { AiOutlineSearch, AiOutlineClose } from 'react-icons/ai';
 import { Link } from 'react-router-dom';
 import { NFTFlexImage, NFTGridImage } from '../../components/renderImage/nftImage';
 import { AppContext } from '../../context';
-import { AVATAR_PIC, parseGalleryData, parseNftMetaData, shortenAddy } from "../../utils";
+import { AVATAR_PIC, parseGalleryData, parseNftMetaData, setMessageFn, shortenAddy } from "../../utils";
 import { Skeleton } from "../../components/loading";
 import NoData from "../../components/noData";
 // import { fakeAccount } from "../../fakeDatas";
@@ -25,7 +25,7 @@ import EditUserModal from "../signup/modal";
 
 const MyAccount = () => {
 
-    const { scrollPosition, contract, user, wallet } = useContext(AppContext);
+    const { scrollPosition, contract, user, wallet, setMessage } = useContext(AppContext);
     const user_address = contract.address;
     const [search, setSearch] = useState('');
     const [error, setError] = useState(false);
@@ -75,6 +75,10 @@ const MyAccount = () => {
             console.log("gallery", err);
             setDataGalleries({ ...dataGalleries, error: true });
             setDataGalleriesLoading(false);
+            setMessageFn(setMessage, { 
+                status: 'error', 
+                message: 'Network error or you might be making too many requests. Try again and be patient while loading.' 
+            });
         }
     };
 
@@ -97,19 +101,23 @@ const MyAccount = () => {
             setDataCreatedLoading(true);
             setDataCreated({ ...dataCreated, error: false });
             const res_ = await fetchAcceptedNFTs(contract.signer, user_address);
-            console.log("fetchCreated", res_);
+            // console.log("fetchCreated", res_);
             const nftLibraryContractInstance = await createNftLibraryContractInstance(contract.signer);
             const nftSubmitContractInstance = await createNftSubmitContractInstance(contract.signer);
             const res = await Promise.all(res_.map((val) => {
                 return fetchNft(val, nftLibraryContractInstance, nftSubmitContractInstance).then(res => res)
             }));
-            console.log("created-res", res);
+            // console.log("created-res", res);
             setDataCreated({ data: res, loaded: true, error: false });
             setDataCreatedLoading(false);
         } catch (err) {
             console.log("created", err);
             setDataCreated({ ...dataCreated, error: true });
             setDataCreatedLoading(false);
+            setMessageFn(setMessage, { 
+                status: 'error', 
+                message: 'Network error or you might be making too many requests. Try again and be patient while loading.' 
+            });
         }
     };
 
@@ -136,11 +144,11 @@ const MyAccount = () => {
                     return fetchNftCollectedMetaData(id, contractInstance, nftSubmitContractInstance).then(res => res)
                 })
             );
-            console.log("nfts_data", res, "ids", ids, res_);
+            // console.log("nfts_data", res, "ids", ids, res_);
             const marketContractInstance = await createNftMarketContractInstance(contract.signer);
             const forSale = Array.from(await marketContractInstance.getCostBatch(Array(ids.length).fill(user_address), ids));
             const res_Forsale = [];
-            console.log("forSale", forSale);
+            // console.log("forSale", forSale);
             for(let i = 0; i < forSale.length; i++) {
                 const [price, isForSale, copies] = forSale[i];
                 if(isForSale && copies > 0) res_Forsale.push({ 
@@ -154,6 +162,10 @@ const MyAccount = () => {
             console.log("collected", err);
             setDataCollected({ ...dataCollected, error: true });
             setDataCollectedLoading(false);
+            setMessageFn(setMessage, { 
+                status: 'error', 
+                message: 'Network error or you might be making too many requests. Try again and be patient while loading.' 
+            });
         }
     };
     
@@ -288,7 +300,7 @@ const MyAccount = () => {
 
                 {!accountLoading && <div className="account-header">
                     <div className="ah-section sect-1 w-full">
-                        {account?.image_banner ?
+                        {!account?.image_banner ?
                             <div className="acct-banner"></div> 
                             :
                             <div className="acct-banner" style={{backgroundImage: `url(${account.image_banner})`}}></div>

@@ -73,7 +73,10 @@ const Gallery = () => {
             console.log(err);
             setMetaDataLoading(false);
             setGalleryError(err === notExist ? err : true);
-            setMessageFn(setMessage, { status: 'error', message: 'Network error. Try again.' });
+            setMessageFn(setMessage, { 
+                status: 'error', 
+                message: 'Network error or you might be making too many requests. Try again and be patient while loading.' 
+            });
         } 
     };
 
@@ -118,7 +121,10 @@ const Gallery = () => {
             console.log(err);
             setNftsError(true);
             setNftLoading(false);
-            setMessageFn(setMessage, { status: 'error', message: 'Network error. Try again.' });
+            setMessageFn(setMessage, { 
+                status: 'error', 
+                message: 'Network error or you might be making too many requests. Try again and be patient while loading.' 
+            });
         } 
     };
 
@@ -150,7 +156,10 @@ const Gallery = () => {
             console.log(err);
             setNftsRejectedAndSubmitedError(true);
             setNftsRejectedAndSubmitedLoading(false);
-            setMessageFn(setMessage, { status: 'error', message: 'Network error. Try again.' });
+            setMessageFn(setMessage, { 
+                status: 'error', 
+                message: 'Network error or you might be making too many requests. Try again and be patient while loading.' 
+            });
         } 
     };
 

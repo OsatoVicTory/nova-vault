@@ -53,11 +53,11 @@ const AnalyticsHomeLoading = ({ route, isMobile }) => {
                                 <div className="anct-price">
                                     <span className="txt-white loading"><Skeleton /></span>
                                 </div>
-                                <div className="anct-change">
+                                {/* <div className="anct-change">
                                     <div className={`anct-stats loading`}>
                                         <Skeleton />
                                     </div>
-                                </div>
+                                </div> */}
                                 <div className="anct-count">
                                     <span className="txt-white loading"><Skeleton /></span>
                                 </div>

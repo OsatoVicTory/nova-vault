@@ -3,7 +3,7 @@ import { createERC1155ContractInstance, createNftMarketContractInstance, getAppA
 import { AppContext } from "../../context";
 import "../../components/modals/modals.css";
 import { AiOutlineClose } from "react-icons/ai";
-import { setMessageFn } from "../../utils";
+import { compareVals, setMessageFn } from "../../utils";
 
 const NftSaleForm = ({ closeModal, token_id, successFn, nft }) => {
 
@@ -20,6 +20,10 @@ const NftSaleForm = ({ closeModal, token_id, successFn, nft }) => {
         e.preventDefault();
 
         try {
+            if(compareVals(data.amount, nft.owned, ">")) {
+                return setMessageFn(setMessage, { status: 'error', message: 'Amount greater than quantity owned.' });
+            }
+
             if(data.amount <= 0 || data.price <= 0) {
                 return setMessageFn(setMessage, { status: 'error', message: 'Input field cannot be zero or less.' });
             }
@@ -65,7 +69,9 @@ const NftSaleForm = ({ closeModal, token_id, successFn, nft }) => {
                                 <form onSubmit={handleSubmit}>
                                     <div className="nftmakeoffer-form">
                                         <div className="cdf-field">
-                                            <label className="txt-white">Quantities for Sale *</label>
+                                            <label className="txt-white">
+                                                {`Quantities for Sale (max ${nft.owned}) *`}
+                                            </label>
                                             <input placeholder={nft.qty > 0 ? nft.qty : "Enter an amount"} type="number" 
                                             name="amount" className="txt-white" onChange={handleChange} required />
                                         </div>

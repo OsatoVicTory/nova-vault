@@ -211,7 +211,10 @@ const AppLayout = ({ children }) => {
                                         value={search||""} placeholder='Search gallery...' onChange={(e) => handleChange(e)} />
 
                                         <AiOutlineClose className='mhs-icon pointer close-icon txt-white'
-                                        onClick={() => setStartSearch(false)} />
+                                        onClick={() => {
+                                            setStartSearch(false);
+                                            setSearch("");
+                                        }} />
                                     </div>
 
                                     {/* for search uncomment below */}
@@ -235,7 +238,11 @@ const AppLayout = ({ children }) => {
                                         value={search||""} placeholder='Search gallery...' onChange={(e) => handleChange(e)} />
 
                                         {/* close here should clear search text */}
-                                        <AiOutlineClose className='mhs-icon pointer close-icon txt-white' />
+                                        <AiOutlineClose className='mhs-icon pointer close-icon txt-white' 
+                                        onClick={() => {
+                                            setStartSearch(false);
+                                            setSearch("");
+                                        }} />
                                     </div>
                                     {/* for search uncomment below */}
                                     {search && <div className="mhs-abs">

@@ -33,16 +33,19 @@ const Wallet = () => {
     const [txnsError, setTxnsError] = useState(false);
     const [width, setWidth] = useState(window.innerWidth);
     const [modal, setModal] = useState('');
-    const [range, setRange] = useState(100);
+    const [range, setRange] = useState(20);
     const [isLoaded, setIsLoaded] = useState(false);
     const [successModalText, setSuccessModalText] = useState("");
     const stopFetching = useRef();
 
     const [chart, setChart] = useState({ dataset: [], labels: [], loaded: false });
 
-    const fetchChartData = (res) => {
-        const { labels, data_rec, data_trans } = getWalletTimeChartData(res);
-        if(labels.length === 1) {
+    const fetchChartData = useCallback((res) => {
+        // the response here has been reversed properly already by getWalletTimeCahrtData fn
+        //  because res holds from most recent to least recent history like Mar 9 - Mar 5
+        // so reverse so it becomes like Mar 5 - Mar 9
+        const { labels, data_rec, data_trans } = getWalletTimeChartData(res); 
+        if(labels.length > 0) {
             labels.unshift("Start");
             data_rec.unshift(0);
             data_trans.unshift(0);
@@ -63,11 +66,12 @@ const Wallet = () => {
                     borderColor: "rgb(240, 57, 57)",
                     pointBackgroundColor: "#fff"
                 }
-            ]
+            ],
+            changed: new Date().getTime() / 1000,
         });
-    };
+    }, []);
 
-    const fetchWallet = async () => {
+    const fetchWallet = useCallback(async () => {
         setWalletLoading(true);
         setError(false);
         try {
@@ -96,9 +100,9 @@ const Wallet = () => {
             setWalletLoading(false);
             setMessageFn(setMessage, { status: 'error', message: 'Network error. Try again.' });
         }
-    };
+    }, []);
 
-    const fetchTxns = async () => {
+    const fetchTxns = useCallback(async () => {
         setTxnsLoading(true);
         setTxnsError(false);
         try {
@@ -114,37 +118,42 @@ const Wallet = () => {
             setTxnsLoading(false);
             setMessageFn(setMessage, { status: 'error', message: 'Network error. Try again.' });
         }
-    };
+    }, []);
     
-    const fetchData = () => {
+    const fetchData = useCallback(() => {
         if(!walletLoaded) fetchWallet();
         if(!isLoaded) fetchTxns();
-    };
+    }, []);
 
     useEffect(() => {
         fetchData();
     }, []);
 
-    const displayableData = useMemo(() => {
-        if(isLoaded && txnsLoading) setTxnsLoading(false);
-        if(range >= txns.length) stopFetching.current = true;
-        return txns.slice(0, range);
-    }, [range, txns.length, isLoaded]);
-
     useResizeThrottle(setWidth);
 
-    function fn() {
+    const fn = useCallback(() => {
+        // console.log("fn", range, stopFetching.current, y >= scrollHeight - offsetHeight - 1);
         if(stopFetching.current) return;
-        const { scrollTop, scrollHeight, offsetHeight } = scrollPosition;
-        if(scrollTop >= scrollHeight - offsetHeight - 1) {
+        const { y, scrollHeight, offsetHeight } = scrollPosition;
+        if(y >= scrollHeight - offsetHeight - 1) {
             setTxnsLoading(true);
-            setRange(range + 10);
+            setRange((prev) => prev + 10);
         }
-    };
+    }, []);
 
     useEffect(() => {
-        if(isLoaded) fn();
-    }, [scrollPosition.scrollTop, isLoaded]);
+        // const { scrollTop as y, scrollLeft as x, scrollHeight, offsetHeight } = e.target;
+        // console.log("scrollPosition", scrollPosition, isLoaded);
+        if(isLoaded && txns.length > 0) fn();
+    }, [scrollPosition.y, isLoaded, txns.length]);
+
+    const displayableData = useMemo(() => {
+        if(isLoaded && txnsLoading) setTxnsLoading(false);
+        // console.log("inside-memo", range, txns.length, stopFetching.current);
+        const res = txns.slice(0, range);
+        if(isLoaded && range > txns.length) stopFetching.current = true;
+        return res;
+    }, [range, txns.length, isLoaded, txnsLoading]);
 
     const getAddress = useCallback((addy) => {
         if(!addy) return "";
@@ -161,7 +170,7 @@ const Wallet = () => {
         else return getFullDateWithTime(val.date, 1000);
     }, [width]);
 
-    const closeModal = () => setModal('');
+    const closeModal = useCallback(() => setModal(''), []);
 
     const successFn = useCallback((txt) => {
         setSuccessModalText(txt);
@@ -211,10 +220,11 @@ const Wallet = () => {
                             </div>
                             :
                             (
-                                (txnsLoading || !chart.loaded) ?
+                                (txnsLoading && !chart.loaded) ?
                                 <div className="canvas-wallet loading"><LoadingSpinner width={'42px'} height={'42px'} /></div>
                                 :
-                                <ChartComponent datasets={chart.dataset} labels={chart.labels} legend={true} xLabels={12} /> 
+                                <ChartComponent datasets={chart.dataset} labels={chart.labels} 
+                                xLabels={12} changed={chart.changed} legend={true} /> 
                             )
                         }
                     </div>
@@ -342,7 +352,7 @@ const Wallet = () => {
             {modal === "buy" && <Buy closeModal={closeModal} setMessage={setMessage} 
             contract={contract} wallet={wallet} setWallet={setWallet} market={market}successFn={successFn}  />}
 
-            {modal === "success" && <SuccessModal closeModal={() => setModal("")} text={successModalText} />}
+            {modal === "success" && <SuccessModal closeModal={closeModal} text={successModalText} />}
 
         </div>
     );

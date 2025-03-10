@@ -3,13 +3,13 @@ import { useCallback, useContext, useEffect, useMemo, useState } from 'react';
 import { Link, useLocation, useNavigate, useParams } from 'react-router-dom';
 // import { IoIosCopy } from 'react-icons/io';
 import { MdArrowBack, MdKeyboardArrowDown, MdOutlineDateRange, MdOutlineDescription } from 'react-icons/md';
-import { BsClock, BsTag } from 'react-icons/bs';
+import { BsTag } from 'react-icons/bs';
 import { PiTagSimpleBold } from 'react-icons/pi';
 import { LoadingSpinner, Skeleton } from '../../components/loading';
 import { getFullDateWithTime, parseGalleryData, parseNftMetaData, shortenAddy } from '../../utils';
 import { 
     createGalleryContractInstance, createNftLibraryContractInstance, 
-    createNftMarketContractInstance, createNftSubmitContractInstance, divideBigDecimals, getPriceInEth, parseBigInt 
+    createNftMarketContractInstance, createNftSubmitContractInstance, divideBigDecimals, parseBigInt 
 } from '../../services/creators';
 import { AppContext } from '../../context';
 import ErrorPage from '../../components/error';
@@ -246,14 +246,16 @@ const NftAssetPutForSale = () => {
                                 </div>
                                 <div className='nft-content-box'>
                                     <div className='sales-time'>
-                                        <BsClock className='st-icon txt-white' />
-                                        <span className="txt-white">{`Voting ends ${getFullDateWithTime_(1)}`}</span>
+                                        <BsTag className='st-icon txt-white' />
+                                        <span className="txt-white">
+                                            {`${nft.qty} ${nft.qty > 1 ? "copies" : "copy"} currently up for sale`}
+                                        </span>
                                     </div>
                                     <div className='asset-price-div'>
                                         <span className="txt-white">Current price</span>
                                         <div className='asset-price txt-white'>
                                             <h2>{`${nft.price} NOVA`}</h2>
-                                            <span>~ {getPriceInEth(nft.price, wallet.ethPrice)} ETH</span>
+                                            {/* <span>~ {getPriceInEth(nft.price, wallet.ethPrice)} ETH</span> */}
                                         </div>
                                         <div className='apd-btns w-full'>
                                             <button className='apd-btn buy-btn pointer' onClick={buttonStClick}>
