@@ -73,7 +73,7 @@ const UserAccount = () => {
     };
 
     const fetchGallery = async (index, contractInstance) => {
-        const id = await contractInstance.getUc(index, contract.address, 0);
+        const id = await contractInstance.getUc(index, user_address, 0);
         const res_ = await contractInstance.getGallery(id);
         return { gallery_id: String(id), ...parseGalleryData(res_) };
     };
@@ -83,7 +83,7 @@ const UserAccount = () => {
             setDataGalleriesLoading(true);
             setDataGalleries({ ...dataGalleries, error: false });
             const contractInstance = await createGalleryContractInstance(contract.signer);
-            const len = await contractInstance.getLenUc(contract.address, 0);
+            const len = await contractInstance.getLenUc(user_address, 0);
             const res = await Promise.all(
                 Array((len + "") - 0).fill(0).map((v, i) => {
                     return fetchGallery(parseBigInt(i), contractInstance).then(res => res);

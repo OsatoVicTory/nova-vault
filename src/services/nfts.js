@@ -25,17 +25,28 @@ export const fetchCreatedNFTs = async (signer, user = null) => {
 
 export const fetchAccessibleGalleries = async (address, contractInstance, fetchGallery) => {
     const len_created = await contractInstance.getLenUc(address, 0);
-    const res_created = await Promise.all(
-        Array((len_created + "") - 0).fill(0).map((v, i) => {
-            return fetchGallery(parseBigInt(i), contractInstance).then(res => res);
-        })
-    );
+    const res_created = [];
+    Array((len_created + "") - 0).fill(0).forEach(async (v, i) => {
+        const ress = await fetchGallery(parseBigInt(i), contractInstance).then(res => res);
+        res_created.push(ress);
+    });
+    // await Promise.all(
+    //     Array((len_created + "") - 0).fill(0).map((v, i) => {
+    //         return fetchGallery(parseBigInt(i), contractInstance).then(res => res);
+    //     })
+    // );
+    
     const len_joined = await contractInstance.getLenUc(address, 1);
-    const res_joined = await Promise.all(
-        Array((len_joined + "") - 0).fill(0).map((v, i) => {
-            return fetchGallery(parseBigInt(i), contractInstance).then(res => res);
-        })
-    );
+    const res_joined = [];
+    Array((len_joined + "") - 0).fill(0).forEach(async (v, i) => {
+        const ress = await fetchGallery(parseBigInt(i), contractInstance).then(res => res);
+        res_joined.push(ress);
+    });
+    // const res_joined = await Promise.all(
+    //     Array((len_joined + "") - 0).fill(0).map((v, i) => {
+    //         return fetchGallery(parseBigInt(i), contractInstance).then(res => res);
+    //     })
+    // );
 
     const mp = new Map(), res = [];
     const d_ = new Date().getTime() / 1000;
