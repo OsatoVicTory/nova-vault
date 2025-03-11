@@ -3,7 +3,7 @@ import "./images.css";
 import { Skeleton } from "../loading";
 import { useCallback, useMemo, useRef } from "react";
 import useGetToolTip from "../../hooks/useGetToolTip";
-import { getFullDateWithTime } from "../../utils";
+import { getFullDateWithTime, parseIpfsUrl } from "../../utils";
 import NftImageFile from "./nftImageFile";
 // import { calcHeight } from "../../utils";
 
@@ -37,12 +37,12 @@ export const NFTGridImage = ({ nft, loading, scrollPosition, isGallery, hasPrice
                             (
                                 scrollPosition === null ?
                                 <LazyLoadImage 
-                                    src={nft.metadata.img} alt={nft.name || nft.metadata.name}
+                                    src={parseIpfsUrl(nft.metadata.img)} alt={nft.name || nft.metadata.name}
                                     width={"100%"} height={"100%"}
                                     placeholder={<div className={`op-img-placeholder`}></div>}
                                 /> :
                                 <LazyLoadImage 
-                                    src={nft.metadata.img} alt={nft.name || nft.metadata.name}
+                                    src={parseIpfsUrl(nft.metadata.img)} alt={nft.name || nft.metadata.name}
                                     width={"100%"} height={"100%"}
                                     scrollPosition={scrollPosition}
                                     placeholder={<div className={`op-img-placeholder`}></div>}
@@ -106,7 +106,7 @@ export const NFTFlexImage = ({ index, nft, loading, scrollPosition, clx }) => {
                             <NftImageFile data={nft.metadata} />
                             :
                             <LazyLoadImage 
-                                src={nft.metadata.img} alt={nft.name || nft.metadata?.name}
+                                src={parseIpfsUrl(nft.metadata.img)} alt={nft.name || nft.metadata?.name}
                                 width={"100%"} height={"100%"}
                                 scrollPosition={scrollPosition}
                                 placeholder={<div className={`op-img-placeholder`}></div>}

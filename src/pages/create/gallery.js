@@ -6,7 +6,7 @@ import { createGalleryContractInstance, multiplyBigDecimals, parseBigInt, parseB
 import { AppContext } from "../../context";
 import SuccessModal from "../../components/modals/success";
 import { sendFile } from "../../services/ipfsServer";
-import { setMessageFn } from "../../utils";
+import { parseFileNameForIpfs, setMessageFn } from "../../utils";
 import { useNavigate } from "react-router-dom";
 
 const CreateGalleryPage = () => {
@@ -67,29 +67,15 @@ const CreateGalleryPage = () => {
             }
 
             setLoading(true);
-                        
-            // const formData = new FormData();
-            // formData.append('file', pfpFile);
-            // formData.append('filename', pfpFile.name);
-            // formData.append('file_type', 'image');
-            const formData = pfpFile;
+            
+            const formData = new File([pfpFile], parseFileNameForIpfs(pfpFile.name), { type: pfpFile.type });
 
             const resp = await sendFile(formData); // to ipfs server
-            // const resp = "https://805e32eeef8d79912f079b3ac853e1f3.ipfscdn.io/ipfs/bafybeigibafuf5byewgondzg3ziiymug77jyqvtf6mpauuv5sp4yjy6mcu/gradient-galaxy-background_23-2150842129.jpg";
-            // const pfpImg = "https://i.seadn.io/gcs/files/642de8fe6f7326fe571351f5ed77e16b.jpg"; 
             const pfpImg = resp; // make api to upload
-            // console.log(resp);
-                        
-            // const b_formData = new FormData();
-            // b_formData.append('file', bannerFile);
-            // b_formData.append('filename', bannerFile.name);
-            // b_formData.append('file_type', 'image');
-            const b_formData = bannerFile;
+            
+            const b_formData = new File([bannerFile], parseFileNameForIpfs(bannerFile.name), { type: bannerFile.type });
 
-            const b_resp = await sendFile(b_formData); // to ipfs server
-            // const b_resp = "https://805e32eeef8d79912f079b3ac853e1f3.ipfscdn.io/ipfs/bafybeihyumbjpp5hoy3rsbgbwtyboekoy5dbkdcd6g5ljrrmfih22qd5mm/gradient-night-sky-illustration_52683-175659.webp";
-            // console.log(b_resp);
-            // const bannerImg = "https://i.seadn.io/gcs/files/642de8fe6f7326fe571351f5ed77e16b.jpg"; 
+            const b_resp = await sendFile(b_formData); // to ipfs server 
             const bannerImg = b_resp; // make api to upload
 
             const meta_data = `img=${pfpImg}%x2banner_img=${bannerImg}%x2description=${data.description}%x2createdAt=${date}`;

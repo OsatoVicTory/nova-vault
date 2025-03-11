@@ -33,11 +33,11 @@ const LeaderBoard = ({ closePage, getAddress, width, minimumStakeAmt, g_id, n_id
     const fetchLeaderBoard = async () => {
         try {
             // only sort stakers data by stake_amount
-            console.log("leaderboard-loading...")
+            // console.log("leaderboard-loading...")
             setLoading({ ...loading, state: true });
             setError(false);
 
-            console.log(stakers, minimumStakeAmt);
+            // console.log(stakers, minimumStakeAmt);
             setLeaderBoard(stakers.map(val => getData(val)));
             return setLoading({ loaded: true, state: false });
         } catch(err) {

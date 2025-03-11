@@ -1,7 +1,7 @@
 import { LazyLoadImage } from "react-lazy-load-image-component"
 import useGetToolTip from "../../hooks/useGetToolTip";
 import { useMemo, useRef } from "react";
-import { parseAmount } from "../../utils";
+import { parseAmount, parseIpfsUrl } from "../../utils";
 
 const HomeList = ({ val, shortenAddy_, scrollPosition }) => {
 
@@ -19,7 +19,7 @@ const HomeList = ({ val, shortenAddy_, scrollPosition }) => {
     return (
         <div className='gml'>
             <LazyLoadImage 
-                src={val.metadata.img} alt={val.name}
+                src={parseIpfsUrl(val.metadata.img)} alt={val.name}
                 width={"100%"} height={"180px"}
                 scrollPosition={scrollPosition}
                 placeholder={<div className={`op-img-placeholder`}></div>}

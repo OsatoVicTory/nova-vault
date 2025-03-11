@@ -11,7 +11,7 @@ import { Skeleton } from '../../components/loading';
 import NoData from '../../components/noData';
 import ErrorPage from '../../components/error';
 // import { fakeGallery } from '../../fakeDatas';
-import { getDateWithoutTime, getPeriod, parseAmount, parseGalleryData, parseNftMetaData, setMessageFn, shortenAddy } from '../../utils';
+import { getDateWithoutTime, getPeriod, parseAmount, parseGalleryData, parseIpfsUrl, parseNftMetaData, setMessageFn, shortenAddy } from '../../utils';
 import { createGalleryContractInstance, createNftLibraryContractInstance, createNftSubmitContractInstance, multiplyBigDecimals, parseBigInt } from '../../services/creators';
 import useGetToolTip from '../../hooks/useGetToolTip';
 import { FaCheck } from 'react-icons/fa6';
@@ -396,7 +396,7 @@ const Gallery = () => {
                                     <div className="ghwb-img w-full h-full loading"></div>
                                     :
                                     <div className="ghwb-img w-full h-full" 
-                                    style={{backgroundImage: `url(${gallery?.metadata?.banner_img})`}}></div>
+                                    style={{backgroundImage: `url(${parseIpfsUrl(gallery?.metadata?.banner_img)})`}}></div>
                                 }
                                 <div className="ghwb-cloak w-full h-full"></div>
                             </div>
@@ -404,7 +404,7 @@ const Gallery = () => {
                                 <div className="ghwb w-full">
                                     <div className="ghwb-profile">
                                         {!metaDataLoading && <div className='ghwbp'>
-                                            <img src={gallery?.metadata?.img} alt='' />
+                                            <img src={parseIpfsUrl(gallery?.metadata?.img)} alt='' />
                                             <div className="ghwbp-txt">
                                                 <span className="ghwbp-name">{gallery.name}</span>
                                                 <span className="ghwbp-aff pointer" ref={ownerRef}>{shortenAddy_}</span>

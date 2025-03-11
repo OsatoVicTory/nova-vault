@@ -6,7 +6,7 @@ import { MdArrowBack, MdKeyboardArrowDown, MdOutlineDateRange, MdOutlineDescript
 import { BsTag } from 'react-icons/bs';
 import { PiTagSimpleBold } from 'react-icons/pi';
 import { LoadingSpinner, Skeleton } from '../../components/loading';
-import { getFullDateWithTime, parseGalleryData, parseNftMetaData, shortenAddy } from '../../utils';
+import { getFullDateWithTime, parseGalleryData, parseIpfsUrl, parseNftMetaData, shortenAddy } from '../../utils';
 import { 
     createERC1155ContractInstance,
     createGalleryContractInstance, createNftLibraryContractInstance, 
@@ -70,14 +70,17 @@ const NftAssetCollected = () => {
             setNftLoading(true);
             setError(false);
             if(state?.nft?.metadata) {
-                if(state?.gallery?.name) setGallery(state.gallery);
-                else {
+                let data = {};
+                if(state?.gallery?.name) {
+                    setGallery(state.gallery);
+                    data = state.gallery;
+                } else {
                     const contractInstance = await createGalleryContractInstance(contract.signer);
-                    const data = await contractInstance.getGallery(g_id);
-                    setGallery(parseGalleryData(data));
+                    data = parseGalleryData(await contractInstance.getGallery(g_id));
+                    setGallery(data);
                 }
                 const p = await fetchQty();
-                setNft({ ...state.nft, ...p });
+                setNft({ ...state.nft, ...p, gallery_name: data.name });
                 setNftLoading(false);
                 return;
             }
@@ -173,12 +176,12 @@ const NftAssetCollected = () => {
 
                         {!nftLoading && <div className='nft-content left-c'>
                             <div className='asset-name'>
-                                {/* <div>
+                                <div>
                                     <Link to={{
                                         pathname: `/app/gallery/${gallery_id}`,
                                         state: { galleryData: gallery }
-                                    }}>{nft.gallery_name}</Link>
-                                </div> */}
+                                    }}>{nft.gallery_name || gallery.name}</Link>
+                                </div>
                                 <h2 className="txt-white">{nft.metadata.name}</h2>
                                 <p>
                                     <span className="txt-white">Owned by</span>
@@ -191,7 +194,7 @@ const NftAssetCollected = () => {
                                     ?
                                     <AssetFile data={nft.metadata} />
                                     :
-                                    <img src={nft.metadata.img} width={'100%'} height={'100%'} alt={'asset'} />
+                                    <img src={parseIpfsUrl(nft.metadata.img)} width={'100%'} height={'100%'} alt={'asset'} />
                                 }
                                 {/* <div className='asset-copy'>
                                     <button className='asset-copy-btn pointer'>
@@ -238,12 +241,12 @@ const NftAssetCollected = () => {
                         {!nftLoading && <div className='nft-content right-c'>
                             <div className='asset-names'>
                                 <div className='asset-name'>
-                                    {/* <div>
+                                    <div>
                                         <Link to={{
                                             pathname: `/app/gallery/${gallery_id}`,
                                             state: { galleryData: gallery }
-                                        }}>{nft.gallery_name}</Link>
-                                    </div> */}
+                                        }}>{nft.gallery_name || gallery.name}</Link>
+                                    </div>
                                     <h2 className="txt-white">{nft.metadata.name}</h2>
                                     <p>
                                         <span className="txt-white">Owned by</span>

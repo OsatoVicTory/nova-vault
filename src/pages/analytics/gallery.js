@@ -21,7 +21,7 @@ import { getGalleryAttendees, getGalleryAttendeesDistribution, getGalleryAttende
 // import useScrollThrottler from "../../hooks/scrollThrottler";
 import { createGalleryContractInstance, createUserContractInstance, divideBigDecimals, parseBigInt } from "../../services/creators";
 import { AppContext } from "../../context";
-import { AVATAR_PIC, getDateWithoutTime, getFullDateWithTime, parseGalleryData, parseStringData, setMessageFn } from "../../utils";
+import { AVATAR_PIC, getDateWithoutTime, getFullDateWithTime, parseGalleryData, parseIpfsUrl, parseStringData, setMessageFn } from "../../utils";
 
 
 const GalleryAnalytics = () => {
@@ -254,9 +254,9 @@ const GalleryAnalytics = () => {
                 
                 {!galleryLoading && <div className="account-header">
                     <div className="ah-section sect-1 w-full">
-                        <div className="acct-banner" style={{backgroundImage: `url(${gallery.metadata.banner_img})`}}></div>
+                        <div className="acct-banner" style={{backgroundImage: `url(${parseIpfsUrl(gallery.metadata.banner_img)})`}}></div>
                         <div className="acct-pfp">
-                            <img src={gallery.metadata.img} alt="pfp" />
+                            <img src={parseIpfsUrl(gallery.metadata.img)} alt="pfp" />
                         </div>
                         <div className="acct-name loaded">
                             <span className="txt-white">{gallery.name}</span>

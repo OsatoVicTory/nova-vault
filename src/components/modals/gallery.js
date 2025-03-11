@@ -4,7 +4,7 @@ import { useCallback, useContext, useMemo, useState } from "react";
 import { MdEdit } from "react-icons/md";
 import { AppContext } from "../../context";
 import { createGalleryContractInstance, multiplyBigDecimals, parseBigInt } from "../../services/creators";
-import { setMessageFn } from "../../utils";
+import { parseFileNameForIpfs, setMessageFn } from "../../utils";
 import { sendFile } from "../../services/ipfsServer";
 
 const CreateGallery = ({ closeModal, successFn }) => {
@@ -69,21 +69,13 @@ const CreateGallery = ({ closeModal, successFn }) => {
             const voting_end = parseInt((new Date(data.voting_end)).getSeconds());
             const voting_start = parseInt((new Date(data.voting_start)).getSeconds());
             // use new Date() to convert the dates to appropriate values
-                        
-            // const formData = new FormData();
-            // formData.append('file', pfpFile);
-            // formData.append('filename', pfpFile.name);
-            // formData.append('file_type', 'image');
-            const formData = pfpFile;
+            
+            const formData = new File([pfpFile], parseFileNameForIpfs(pfpFile.name), { type: pfpFile.type });
 
             const resp = await sendFile(formData); // to ipfs server
             const pfpImg = resp; // make api to upload
-                        
-            // const b_formData = new FormData();
-            // b_formData.append('file', bannerFile);
-            // b_formData.append('filename', bannerFile.name);
-            // b_formData.append('file_type', 'image');
-            const b_formData = bannerFile;
+            
+            const b_formData = new File([bannerFile], parseFileNameForIpfs(bannerFile.name), { type: bannerFile.type });
 
             const b_resp = await sendFile(b_formData); // to ipfs server
             const bannerImg = b_resp; // make api to upload

@@ -46,6 +46,21 @@ export const Z_ = (z) => {
     return z > 9 ? z : "0"+z;
 };
 
+export const parseIpfsUrl = (url) => {
+    // const spl = url.split("/");
+    // for(let i=0; i< spl.length; i++) {
+    //     if(spl[i] === "ipfs") {
+    //         return `https://ipfs.io/${spl.slice(i).join("/")}`;
+    //     }
+    // }
+    return url;
+};
+
+export const parseFileNameForIpfs = (name) => {
+    name = name.replaceAll(" ", "_");
+    return name.replaceAll(/[^\w\d.-]/g, "_");
+};
+
 export const getTime = (date, x = 0) => {
     if(x) date = String(multiplyBigDecimals(String(date), 1000));
     date = new Date(Number(date));

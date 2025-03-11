@@ -2,7 +2,7 @@ import { MdEdit, MdKeyboardArrowDown } from "react-icons/md";
 import "./create.css";
 import { BsSend } from "react-icons/bs";
 import { useCallback, useState, useMemo, useEffect, useContext } from "react";
-import { parseGalleryData, setMessageFn } from "../../utils";
+import { parseFileNameForIpfs, parseGalleryData, setMessageFn } from "../../utils";
 import AttributesSelector from "./attributesModal";
 import CreateGallery from "../../components/modals/gallery";
 import SuccessModal from "../../components/modals/success";
@@ -140,10 +140,8 @@ const CreateNFT = () => {
                 return;
             }
             
-            // const formData = new FormData();
-            // formData.append('file', assetFile);
-            const formData = assetFile;
             const file_type = file_types.find(ft => assetFile.name.endsWith(ft.name))?.file_type;
+            const formData = new File([assetFile], parseFileNameForIpfs(assetFile.name), { type: assetFile.type });
         
             if(!file_type) {
                 setLoading(false);
@@ -156,9 +154,7 @@ const CreateNFT = () => {
             if(thumbnail.file && file_type === "image") {
                 setMessageFn(setMessage, { status: 'error', message: `Thumbnail cannot be included for image file. Uploading without thumbnail.` });
             } else if(thumbnail.file && file_type !== "image") {
-                // const t_formData = new FormData();
-                // t_formData.append('file', thumbnail);
-                const t_formData = thumbnail;
+                const t_formData = new File([thumbnail], parseFileNameForIpfs(thumbnail.name), { type: thumbnail.type });
 
                 const resp_ = await sendFile(t_formData); // to ipfs server
                 thumbnail_ = resp_;
@@ -172,8 +168,6 @@ const CreateNFT = () => {
             // console.log(b_resp);
 
             const resp = await sendFile(formData); // to ipfs server
-            // console.log(resp);
-            // const assetImg = resp.data;
             const assetImg = file_type === "image" ? resp : "";
             const src = file_type === "image" ? "" : resp;
             

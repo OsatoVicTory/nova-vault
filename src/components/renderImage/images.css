@@ -103,6 +103,10 @@
     width: 50px;
     height: 48px;
 }
+.notif-div-img .NftFileImage {
+    width: 45px;
+    height: 45px;
+}
 .NftFileImage img {
     width: 100%;
     height: 100%;
@@ -128,6 +132,11 @@
     bottom: 2px;
     right: 0px;
 }
+.notif-div-img .nft-file-image-div {
+    padding: 1px;
+    bottom: 0px;
+    right: 0px;
+}
 .nfid-icon {
     width: 17px;
     height: 17px;
@@ -136,6 +145,10 @@
 .anct-div .nfid-icon {
     width: 11px;
     height: 11px;
+}
+.notif-div-img .nfid-icon {
+    width: 10px;
+    height: 10px;
 }
 .nft-file-image-div span {
     margin-left: 9px;
@@ -146,6 +159,10 @@
 .anct-div .nft-file-image-div span {
     font-size: 12px !important;
     margin-left: 4px;
+}
+.notif-div-img .nft-file-image-div span {
+    font-size: 10px !important;
+    margin-left: 2.5px;
 }
 
 @media screen and (min-width: 1200px) {

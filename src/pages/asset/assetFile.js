@@ -3,7 +3,7 @@ import defaultAudioThumbnail from "../../assets/musicdefaultThnumbnail.jpg";
 import "./assetFile.css";
 import { IoPauseSharp } from "react-icons/io5";
 import { IoMdPlay } from "react-icons/io";
-import { getVideoImage } from "../../utils";
+import { getVideoImage, parseIpfsUrl } from "../../utils";
 import { Skeleton } from "../../components/loading";
 
 export const AudioFile = ({ data }) => {
@@ -86,7 +86,7 @@ export const AudioFile = ({ data }) => {
     return (
         <div className="asset-audio-file">
             <div className="asset-audio-file-thumbnail">
-                <img src={data.thumbnail || defaultAudioThumbnail} alt="thumbnail" />
+                <img src={data.thumbnail ? parseIpfsUrl(data.thumbnail) : defaultAudioThumbnail} alt="thumbnail" />
             </div>
             <div className="asset-audio-file-base">
                 <div className='player-controls w-full'>
@@ -115,7 +115,7 @@ export const VideoFile = ({ data }) => {
     const [state, setState] = useState('');
     const [playingTime, setPlayingTime] = useState(0);
     const [duration, setDuration] = useState(0);
-    const [thumbnail, setThumbnail] = useState(data.thumbnail);
+    const [thumbnail, setThumbnail] = useState(data.thumbnail ? parseIpfsUrl(data.thumbnail) : "");
     const [played, setPlayed] = useState(false);
 
     function slided(e) {

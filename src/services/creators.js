@@ -80,6 +80,7 @@ export const parseBigIntNumberForBackend = (value, dec = 10000000000) => {
 };
 
 export const parseBigIntNumberForFrontend = (value, dec = 10000000000) => {
+    if(dec <= 0) return String(value);
     const n1 = new BigDecimal(value+'');
     const n2 = new BigDecimal(dec+'');
     const result = BigDecimal.stripTrailingZero((n1.divide(n2)).getValue());
@@ -95,6 +96,7 @@ export const parseBigIntDecimal = (val, str = false) => {
 };
 
 export const getTokenAmount = (value, decimals=10000000000) => {
+    if(decimals <= 0) return String(value);
     const n1 = new BigDecimal(value+'');
     const n2 = new BigDecimal(decimals+'');
     const result = BigDecimal.stripTrailingZero((n1.divide(n2)).getValue());
@@ -109,6 +111,7 @@ export const multiplyBigDecimals = (value, mul) => {
 };
 
 export const divideBigDecimals = (value, decimals, round = 0) => {
+    if(decimals <= 0) return String(value);
     const n1 = new BigDecimal(value+'');
     const n2 = new BigDecimal((decimals || 1E10) + ''); // wallet decimals may not be available at specific immediate instance
     const result = BigDecimal.stripTrailingZero((n1.divide(n2)).getValue());

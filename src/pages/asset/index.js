@@ -13,7 +13,7 @@ import LeaderBoard from './leaderboard';
 import { LoadingSpinner, Skeleton } from '../../components/loading';
 import useResizeThrottle from '../../hooks/useResize';
 // import { fakeNftData } from '../../fakeDatas';
-import { getFullDateWithTime, parseAmount, parseGalleryData, parseNftMetaData, setMessageFn, shortenAddy } from '../../utils';
+import { getFullDateWithTime, parseAmount, parseGalleryData, parseIpfsUrl, parseNftMetaData, setMessageFn, shortenAddy } from '../../utils';
 import { 
     createGalleryContractInstance, createMinterContractInstance, 
     createNftLibraryContractInstance, createNftSubmitContractInstance, 
@@ -97,13 +97,16 @@ const NftAsset = () => {
             setNftLoading(true);
             setError(false);
             if(state?.nft?.metadata) {
-                if(state?.gallery?.name) setGallery(state.gallery);
-                else {
+                let data = {};
+                if(state?.gallery?.name) {
+                    setGallery(state.gallery);
+                    data = state.gallery;
+                } else {
                     const contractInstance = await createGalleryContractInstance(contract.signer);
-                    const data = await contractInstance.getGallery(g_id);
-                    setGallery(parseGalleryData(data));
+                    data = parseGalleryData(await contractInstance.getGallery(g_id));
+                    setGallery(data);
                 }
-                setNft(state.nft);
+                setNft({ ...state.nft, gallery_name: data.name });
                 setNftLoading(false);
                 return;
             }
@@ -515,7 +518,7 @@ const NftAsset = () => {
                                     <Link to={{
                                         pathname: `/app/gallery/${gallery_id}`,
                                         state: { galleryData: gallery }
-                                    }}>{nft.gallery_name}</Link>
+                                    }}>{nft.gallery_name||gallery.name}</Link>
                                 </div>
                                 <h2 className="txt-white">{nft.metadata.name}</h2>
                                 <p>
@@ -529,7 +532,7 @@ const NftAsset = () => {
                                     ?
                                     <AssetFile data={nft.metadata} />
                                     :
-                                    <img src={nft.metadata.img} width={'100%'} height={'100%'} alt={'asset'} />
+                                    <img src={parseIpfsUrl(nft.metadata.img)} width={'100%'} height={'100%'} alt={'asset'} />
                                 }
                                 <div className='asset-copy'>
                                     <button className='asset-copy-btn pointer' onClick={handleCopy}>
@@ -585,7 +588,7 @@ const NftAsset = () => {
                                         <Link to={{
                                             pathname: `/app/gallery/${gallery_id}`,
                                             state: { galleryData: gallery }
-                                        }}>{nft.gallery_name}</Link>
+                                        }}>{nft.gallery_name||gallery.name}</Link>
                                     </div>
                                     <h2 className="txt-white">{nft.metadata.name}</h2>
                                     <p>

@@ -13,6 +13,7 @@ import { ethers } from "ethers";
 import { Contract } from "ethers";
 import { GiReceiveMoney } from "react-icons/gi";
 import NoData from "../components/noData";
+import NftImageFile from "../components/renderImage/nftImageFile";
 
 const NotificationModal = ({ contract, data, loading, closeModal, notificationLen }) => {
 
@@ -88,7 +89,12 @@ const NotificationModal = ({ contract, data, loading, closeModal, notificationLe
                                                             <div className="notif-link no-hover txt-white">
                                                                 <div className={`notif-li-div w-full ${idx + 1 <= notificationLen}`}>
                                                                     <div className="notif-div-img">
-                                                                        <img src={val.img} alt="" />
+                                                                        {
+                                                                            data.src ?
+                                                                            <NftImageFile data={val} />
+                                                                            :
+                                                                            <img src={val.img} alt="" />
+                                                                        }
                                                                     </div>
                                                                     <div className="notif-txt">
                                                                         <span className="notif-desc txt-white">

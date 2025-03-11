@@ -17,7 +17,7 @@ import { IoIosCopy } from "react-icons/io";
 import { formatAssetAnalyticsAddress, getDistributionAboveAndBelowSetPrice, getNfStaketLineData, getNftStakeDistribution, priceDiff } from "../../services/galleryAnalytics";
 // import useScrollThrottler from "../../hooks/scrollThrottler";
 import { createGalleryContractInstance, createNftLibraryContractInstance, createNftSubmitContractInstance, createStakeContractInstance, createUserContractInstance, divideBigDecimals, getPriceInEth, multiplyBigDecimals, parseBigInt, subtractBigDecimals } from "../../services/creators";
-import { AVATAR_PIC, getFullDateWithTime, parseGalleryData, parseNftMetaData, parseStringData, setMessageFn, shortenAddy } from "../../utils";
+import { AVATAR_PIC, getFullDateWithTime, parseGalleryData, parseIpfsUrl, parseNftMetaData, parseStringData, setMessageFn, shortenAddy } from "../../utils";
 import { AssetFile } from "../asset/assetFile";
 
 const AssetAnalytics = () => {
@@ -255,7 +255,7 @@ const AssetAnalytics = () => {
                                 ?
                                 <AssetFile data={nft.metadata} />
                                 :
-                                <img src={nft.metadata.img} width={'100%'} height={'100%'} alt={'asset'} />
+                                <img src={parseIpfsUrl(nft.metadata.img)} width={'100%'} height={'100%'} alt={'asset'} />
                             }
                             <div className='asset-copy'>
                                 <button className='asset-copy-btn pointer'>

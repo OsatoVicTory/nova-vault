@@ -6,7 +6,7 @@ import { MdArrowBack, MdKeyboardArrowDown, MdOutlineDateRange, MdOutlineDescript
 import { BsTag } from 'react-icons/bs';
 import { PiTagSimpleBold } from 'react-icons/pi';
 import { LoadingSpinner, Skeleton } from '../../components/loading';
-import { getFullDateWithTime, parseGalleryData, parseNftMetaData, shortenAddy } from '../../utils';
+import { getFullDateWithTime, parseGalleryData, parseIpfsUrl, parseNftMetaData, shortenAddy } from '../../utils';
 import { 
     createGalleryContractInstance, createNftLibraryContractInstance, 
     createNftMarketContractInstance, createNftSubmitContractInstance, divideBigDecimals, parseBigInt 
@@ -70,14 +70,17 @@ const NftAssetPutForSale = () => {
             setNftLoading(true);
             setError(false);
             if(state?.nft?.metadata) {
-                if(state?.gallery?.name) setGallery(state.gallery);
-                else {
+                let data = {};
+                if(state?.gallery?.name) {
+                    data = state.gallery;
+                    setGallery(state.gallery);
+                } else {
                     const contractInstance = await createGalleryContractInstance(contract.signer);
-                    const data = await contractInstance.getGallery(g_id);
-                    setGallery(parseGalleryData(data));
+                    data = parseGalleryData(await contractInstance.getGallery(g_id));
+                    setGallery(data);
                 }
                 const p = await fetchPriceAndQty();
-                setNft({ ...state.nft, ...p });
+                setNft({ ...state.nft, ...p, gallery_name: data.name });
                 setNftLoading(false);
                 return;
             }
@@ -171,7 +174,7 @@ const NftAssetPutForSale = () => {
                                     <Link to={{
                                         pathname: `/app/gallery/${gallery_id}`,
                                         state: { galleryData: gallery }
-                                    }}>{nft.gallery_name}</Link>
+                                    }}>{nft.gallery_name||gallery.name}</Link>
                                 </div>
                                 <h2 className="txt-white">{nft.metadata.name}</h2>
                                 <p>
@@ -185,7 +188,7 @@ const NftAssetPutForSale = () => {
                                     ?
                                     <AssetFile data={nft.metadata} />
                                     :
-                                    <img src={nft.metadata.img} width={'100%'} height={'100%'} alt={'asset'} />
+                                    <img src={parseIpfsUrl(nft.metadata.img)} width={'100%'} height={'100%'} alt={'asset'} />
                                 }
                                 {/* <div className='asset-copy'>
                                     <button className='asset-copy-btn pointer'>
@@ -236,7 +239,7 @@ const NftAssetPutForSale = () => {
                                         <Link to={{
                                             pathname: `/app/gallery/${gallery_id}`,
                                             state: { galleryData: gallery }
-                                        }}>{nft.gallery_name}</Link>
+                                        }}>{nft.gallery_name||gallery.name}</Link>
                                     </div>
                                     <h2 className="txt-white">{nft.metadata.name}</h2>
                                     <p>

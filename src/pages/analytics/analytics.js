@@ -15,7 +15,7 @@ import {
     multiplyBigDecimals, 
     parseBigInt, subtractBigDecimals 
 } from "../../services/creators";
-import { getFullDateWithTime, parseAmount, parseGalleryData, parseNftMetaData, setMessageFn } from "../../utils";
+import { getFullDateWithTime, parseAmount, parseGalleryData, parseIpfsUrl, parseNftMetaData, setMessageFn } from "../../utils";
 import { fetchAcceptedNFTs } from "../../services/nfts";
 // import { getGalleryAttendeesCntForHomePage } from "../../services/galleryAnalytics";
 // import { MdInfoOutline, MdOutlinePerson } from "react-icons/md";
@@ -290,7 +290,7 @@ const AnalyticsHome = () => {
                                                     {
                                                         (route === "Galleries" || !val.src) ?
                                                         <LazyLoadImage 
-                                                            src={val.img} alt={val.name}
+                                                            src={parseIpfsUrl(val.img)} alt={val.name}
                                                             width={"100%"} height={"100%"}
                                                             scrollPosition={scrollPosition}
                                                             placeholder={<div className={`op-img-placeholder`}></div>}

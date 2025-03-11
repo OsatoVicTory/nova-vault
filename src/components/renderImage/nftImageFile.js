@@ -2,7 +2,7 @@ import "./images.css";
 import defaultAudioThumbnail from "../../assets/musicdefaultThnumbnail.jpg";
 import { BsMusicNoteBeamed } from "react-icons/bs";
 import { useEffect, useRef, useState } from "react";
-import { getVideoImage } from "../../utils";
+import { getVideoImage, parseIpfsUrl } from "../../utils";
 import { Skeleton } from "../loading";
 import { IoMdVideocam } from "react-icons/io";
 
@@ -31,7 +31,7 @@ const AudioNftFileImage = ({ data }) => {
 
     return (
         <div className="NftFileImage">
-            <img src={data.thumbnail || defaultAudioThumbnail} alt="thumbnail" />
+            <img src={data.thumbnail ? parseIpfsUrl(data.thumbnail) : defaultAudioThumbnail} alt="thumbnail" />
             <div className="nft-file-image-div">
                 <BsMusicNoteBeamed className="nfid-icon" />
                 <span>{duration === 0 ? "00:00" : duration}</span>
@@ -42,7 +42,7 @@ const AudioNftFileImage = ({ data }) => {
 
 const VideoNftFileImage = ({ data }) => {
 
-    const [thumbnail, setThumbnail] = useState(data.thumbnail);
+    const [thumbnail, setThumbnail] = useState(data.thumbnail ? parseIpfsUrl(data.thumbnail) : "");
     const [duration, setDuration] = useState(0);
     const video = useRef();
 
