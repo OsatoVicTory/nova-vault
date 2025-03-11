@@ -67,7 +67,7 @@ const NoWallet = ({ startConnect, setStartConnect }) => {
     const openWallet = useCallback(() => {
         if(!isConnected && !address && !loading && setLoading) {
             setLoading(true);
-            open();
+            open({ view: "Connect", namespace: "eip155" }); // only ethereum accounts
         }
     }, [loading, isConnected, address, setLoading]);
 

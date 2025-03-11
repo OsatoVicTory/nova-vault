@@ -75,8 +75,9 @@ const Signup = () => {
                 formData.append('app_name', 'nft-nova-vault-app');
 
                 const data_ = await sendProfileFile(formData); // to server, not ipfs upload, as ipfs is for permanent storage (i.e only NFTs)
-                img_.url = data_.data.secure_url;
-                img_.pub_id = data_.data.public_id;
+                img_.url = data_.data.data.secure_url;
+                img_.pub_id = data_.data.data.public_id;
+                // console.log("res", data_);
             }
 
             if(bannerFile?.size) {
@@ -87,9 +88,10 @@ const Signup = () => {
                 formData.append('app_name', 'nft-nova-vault-app');
 
                 const data_ = await sendProfileFile(formData);
-                img_.b = data_.data.secure_url;
-                img_.b_id = data_.data.public_id;
+                img_.b = data_.data.data.secure_url;
+                img_.b_id = data_.data.data.public_id;
             }
+            // console.log(img_);
 
             const contractInstance = await createUserContractInstance(contract.signer);
             const m_ = Object.keys(data).map(key => `${key}=${data[key]}%x2`).join("");
@@ -103,7 +105,8 @@ const Signup = () => {
             });
                             
             const walletContractInstance = await createERC20ContractInstance(contract.signer);
-            const res = await walletContractInstance.balanceOf(contract.address);
+            const res = await walletContractInstance.balanceOf(contract.address); //0.00002212
+            // console.log("wallet", res);
             // res is type bigInt
             const name = await walletContractInstance.name();
             const symbol = await walletContractInstance.symbol();

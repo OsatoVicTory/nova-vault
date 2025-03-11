@@ -15,7 +15,7 @@ const Login = () => {
 
     const { setContract, setUser, setWallet, setMessage } = useContext(AppContext);
     const { open } = useAppKit();
-    const { address, isConnected } = useAppKitAccount();
+    const { address, isConnected, allAccounts } = useAppKitAccount();
     const { walletProvider } = useAppKitProvider('eip155');
     const [loading, setLoading] = useState(false);
     const navigate = useNavigate();
@@ -28,6 +28,7 @@ const Login = () => {
             const ethersProvider = new BrowserProvider(walletProvider);
             // const ethersProvider = new BrowserProvider(window.ethereum);
             const signer = await ethersProvider.getSigner();
+            // console.log("all-accounts", allAccounts);
             const address_ = getAppAddress(await signer.getAddress());
             setContract({ address: address_, actualAddress: address_, signer });
 
@@ -71,7 +72,7 @@ const Login = () => {
     const startConnect = useCallback(() => {
         if (!isConnected && !address) {
             setLoading(true);
-            open();
+            open({ view: "Connect", namespace: "eip155" }); // only ethereum accounts
         }
     }, [isConnected, address]);
 
