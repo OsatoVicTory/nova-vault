@@ -1,4 +1,4 @@
-import { useAppKitProvider, useAppKitAccount } from "@reown/appkit/react";
+import { useAppKitProvider, useAppKitAccount, useDisconnect } from "@reown/appkit/react";
 import { useAppKit } from '@reown/appkit/react';
 import "./styles.css";
 import { useCallback, useContext, useEffect, useState } from "react";
@@ -15,7 +15,8 @@ const Login = () => {
 
     const { setContract, setUser, setWallet, setMessage } = useContext(AppContext);
     const { open } = useAppKit();
-    const { address, isConnected, allAccounts } = useAppKitAccount();
+    const { disconnect } = useDisconnect();
+    const { address, isConnected } = useAppKitAccount();
     const { walletProvider } = useAppKitProvider('eip155');
     const [loading, setLoading] = useState(false);
     const navigate = useNavigate();
@@ -24,11 +25,9 @@ const Login = () => {
         try {
 
             setLoading(true);
-
             const ethersProvider = new BrowserProvider(walletProvider);
             // const ethersProvider = new BrowserProvider(window.ethereum);
             const signer = await ethersProvider.getSigner();
-            // console.log("all-accounts", allAccounts);
             const address_ = getAppAddress(await signer.getAddress());
             setContract({ address: address_, actualAddress: address_, signer });
 
@@ -64,21 +63,29 @@ const Login = () => {
         }
     };
 
-    useEffect(() => {
-        console.log("address", address, isConnected);
-        if(isConnected && address) getSignature();
-    }, [address, isConnected]);
+    // useEffect(() => {
+    //     console.log("address", address, isConnected);
+    //     if(isConnected && address) getSignature();
+    // }, [address, isConnected]);
 
-    const startConnect = useCallback(() => {
+    const startConnect = useCallback(async () => {
         if (!isConnected && !address) {
-            setLoading(true);
+            setLoading("sign");
             open({ view: "Connect", namespace: "eip155" }); // only ethereum accounts
+        } else {
+            setLoading(true);
+            await disconnect();
+            await new Promise((res) => setTimeout(res, 600));
+            open({ view: "Connect", namespace: "eip155" }); // only ethereum accounts
+            setLoading("sign");
         }
     }, [isConnected, address]);
 
-    // const startConnect = useCallback(() => {
-    //     return;
-    // }, []);
+    useEffect(() => {
+        if(loading === "sign" && isConnected && walletProvider) {
+            getSignature();
+        }
+    }, [loading, isConnected, address, walletProvider]);
 
     return (
         <div className="Login">

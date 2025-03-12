@@ -62,7 +62,7 @@ const EditUserModal = ({ closeModal }) => {
 
                 // to server, not ipfs upload, as ipfs is for permanent storage (i.e only NFTs)
                 const data_ = await sendProfileFile(formData);
-                console.log("data_", data_); 
+                // console.log("data_", data_); 
                 img_.url = data_.data.data.secure_url;
                 img_.pub_id = data_.data.data.public_id;
             }
